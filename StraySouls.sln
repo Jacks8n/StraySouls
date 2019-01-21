@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StraySouls", "StraySouls\StraySouls.csproj", "{2642CBA0-00ED-4374-86F6-E82CC82F9242}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22C664BD-877B-44DF-8ECF-2808522469A8} = {22C664BD-877B-44DF-8ECF-2808522469A8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsFormats", "G:\GitSource\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{22C664BD-877B-44DF-8ECF-2808522469A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Debug|x64.Build.0 = Debug|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Release|x64.ActiveCfg = Release|Any CPU
+		{2642CBA0-00ED-4374-86F6-E82CC82F9242}.Release|x64.Build.0 = Release|Any CPU
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|x64.ActiveCfg = Debug|x64
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Debug|x64.Build.0 = Debug|x64
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|x64.ActiveCfg = Release|x64
+		{22C664BD-877B-44DF-8ECF-2808522469A8}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C23A0814-F200-4E34-A54E-D85D0CE92372}
+	EndGlobalSection
+EndGlobal

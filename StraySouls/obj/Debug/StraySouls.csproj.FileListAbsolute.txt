@@ -1,0 +1,11 @@
+F:\Projects\StraySouls\StraySouls\obj\Debug\StraySouls.csprojAssemblyReference.cache
+F:\Projects\StraySouls\StraySouls\obj\Debug\StraySouls.csproj.CoreCompileInputs.cache
+F:\Projects\StraySouls\StraySouls\bin\Debug\StraySouls.exe.config
+F:\Projects\StraySouls\StraySouls\bin\Debug\StraySouls.exe
+F:\Projects\StraySouls\StraySouls\bin\Debug\StraySouls.pdb
+F:\Projects\StraySouls\StraySouls\bin\Debug\SoulsFormats.dll
+F:\Projects\StraySouls\StraySouls\bin\Debug\SoulsFormats.pdb
+F:\Projects\StraySouls\StraySouls\bin\Debug\SoulsFormats.xml
+F:\Projects\StraySouls\StraySouls\obj\Debug\StraySouls.csproj.CopyComplete
+F:\Projects\StraySouls\StraySouls\obj\Debug\StraySouls.exe
+F:\Projects\StraySouls\StraySouls\obj\Debug\StraySouls.pdb
