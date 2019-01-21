@@ -1,0 +1,11 @@
+G:\GitSource\StraySouls\StraySouls\bin\Debug\StraySouls.exe.config
+G:\GitSource\StraySouls\StraySouls\bin\Debug\StraySouls.exe
+G:\GitSource\StraySouls\StraySouls\bin\Debug\StraySouls.pdb
+G:\GitSource\StraySouls\StraySouls\bin\Debug\SoulsFormats.dll
+G:\GitSource\StraySouls\StraySouls\bin\Debug\SoulsFormats.pdb
+G:\GitSource\StraySouls\StraySouls\bin\Debug\SoulsFormats.xml
+G:\GitSource\StraySouls\StraySouls\obj\Debug\StraySouls.csprojAssemblyReference.cache
+G:\GitSource\StraySouls\StraySouls\obj\Debug\StraySouls.csproj.CoreCompileInputs.cache
+G:\GitSource\StraySouls\StraySouls\obj\Debug\StraySouls.csproj.CopyComplete
+G:\GitSource\StraySouls\StraySouls\obj\Debug\StraySouls.exe
+G:\GitSource\StraySouls\StraySouls\obj\Debug\StraySouls.pdb
