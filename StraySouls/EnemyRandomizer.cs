@@ -27,7 +27,6 @@ namespace StraySouls
         private static readonly string[] ID_MAIN_BOSS = new string[]
         {
             "c5110_0000", //Ludex Gundyr
-            "c5110_0001", //Ludex Gundyr (P2)
             "c2240_0000", //Vordt of the Boreal Valley
             "c1320_0000", //Crystal Sage
             "c5220_0000", //Deacons of the Deep ()
@@ -43,7 +42,6 @@ namespace StraySouls
             "c3160_0000", //Dragonslayer Armour
             "c5250_0001", //Lorian, Elder Prince (P1)
             "c5250_0000", //Lorian, Elder Prince (P2)
-          //"Unknown", //Lothric, Younger Prince
             "c5280_0000", //Soul of Cinder
             "c6020_0001", //Sister Friede (P1)
             "c6010_0001", //Sister Friede (P2)
@@ -53,7 +51,7 @@ namespace StraySouls
             "c5020_0002", //Demon from Below
             "c6280_0000", //Judicator Argo
             "c0000_0010", //Halflight, Spear of the Church
-            "c6201_0000", //Slave Knight Gael
+            "c6200_0000", //Slave Knight Gael
         };
 
         private static readonly string[] ID_OPTIONAL_BOSS = new string[]
@@ -61,14 +59,14 @@ namespace StraySouls
             "c5180_0000", //Curse-rotted Greatwood*
             "c3050_0000", //Old Demon King
             "c2090_0000", //Oceiros, the Consumed King
-            "c5110_0000", //Champion Gundyr*
+            "c5115_0000", //Champion Gundyr*
             "c3141_0000", //Ancient Wyvern
             "c5030_0000", //The Nameless King (P1)
             "c5010_0000", //The Nameless King (P2)
             "c0000_0009", //Champion's Gravetender
             "c6030_0004", //Gravetender Greatwolf
-            "c6210_0000", //Darkeater Midir (Welcomer)
-            "c6211_0000", //Darkeater Midir (Boss)
+          //"c6210_0000", //Darkeater Midir (Welcomer)
+            "c6210_0000", //Darkeater Midir (Boss)
         };
 
         private static readonly string[] ID_AGGRESSIVE_NPC = new string[]
