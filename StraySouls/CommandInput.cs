@@ -100,7 +100,7 @@ namespace StraySouls
             "m45_00_00_00.msb.dcx",
             "m50_00_00_00.msb.dcx",
             "m51_00_00_00.msb.dcx",
-            "m51_01_00_00.msb.dcx",
+          //"m51_01_00_00.msb.dcx", //Filianore's Rest
         };
 
         private static string _mapstudioPath;

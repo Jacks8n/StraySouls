@@ -29,7 +29,12 @@ namespace StraySouls
             "c5110_0000", //Ludex Gundyr
             "c2240_0000", //Vordt of the Boreal Valley
             "c1320_0000", //Crystal Sage
+            "c1320_x", //Crystal Sage ()
             "c5220_0000", //Deacons of the Deep ()
+            "c5221_x", //Deacons of the Deep (Stout)
+            "c5222_x", //Deacons of the Deep (Tall)
+            "c5223_x", //Deacons of the Deep (Short)
+            "c5225_x", //Deacons of the Deep (Blue)
             "c3040_0000", //Abyss Wathcers (Both P1 and P2)
             "c3040_0001", //Abyss Wathcers (P1, normal)
             "c3040_0002", //Abyss Wathcers (P1, red eyes)
@@ -43,15 +48,17 @@ namespace StraySouls
             "c5250_0001", //Lorian, Elder Prince (P1)
             "c5250_0000", //Lorian, Elder Prince (P2)
             "c5280_0000", //Soul of Cinder
+            "c6020_0002", //Sister Friede (Meet)
+            "c6010_0001", //Father Ariandel (Meet)
             "c6020_0001", //Sister Friede (P1)
-            "c6010_0001", //Sister Friede (P2)
+            "c6010_0000", //Sister Friede and Father Ariandel (P2)
             "c6020_0000", //Blackflame Friede (P3)
-            "c6010_0000", //Father Ariandel (P2)
-            "c5020_0001", //Demon in Pain
-            "c5020_0002", //Demon from Below
+            "c5020_0001", //Demon from Below
+            "c5020_0002", //Demon in Pain
             "c6280_0000", //Judicator Argo
             "c0000_0010", //Halflight, Spear of the Church
-            "c6200_0000", //Slave Knight Gael
+            "c6200_0000", //Slave Knight Gael (P1)
+            "c6300_0003", //Slave Knight Gael (P2)
         };
 
         private static readonly string[] ID_OPTIONAL_BOSS = new string[]
@@ -64,32 +71,56 @@ namespace StraySouls
             "c5030_0000", //The Nameless King (P1)
             "c5010_0000", //The Nameless King (P2)
             "c0000_0009", //Champion's Gravetender
-            "c6030_0004", //Gravetender Greatwolf
-          //"c6210_0000", //Darkeater Midir (Welcomer)
-            "c6210_0000", //Darkeater Midir (Boss)
+            "c6030_0001", //Gravetender Greatwolf (First)
+            "c6030_0001", //Gravetender Greatwolf (Second)
+            "c6030_0004", //Gravetender Greatwolf (Boss)
+            "c6210_0000", //Darkeater Midir
+
+            //Mini Boss (Key event)
+            "c3060_0001" //Fire Demon
         };
 
         private static readonly string[] ID_AGGRESSIVE_NPC = new string[]
         {
           //"c", //Alva, Seeker of the Spurned
           //"c", //Black Hand Kamui
-            "c0000_0015", //Brigand
+          //"c0000_0015", //Brigand
           //"c", //Court Sorcerer
           //"c", //Creighton the Wanderer
-            "c0000_0015", //Daughter of Crystal Kriemhild
+          //"c0000_0015", //Daughter of Crystal Kriemhild
           //"c", //Desert Pyromancer Zoey
           //"c", //Dragonblood Knight
           //"c", //Drang Knight
-            "c0000_0016", //Fallen Knight
+          //"c0000_0016", //Fallen Knight
           //"c", //Havel the Rock
-            "c0000_0015", //Isabella the Mad
+          //"c0000_0015", //Isabella the Mad
           //"c", //Knight Slayer Tsorig
           //"c", //Livid Pyromancer Dunnel
           //"c", //Longfinger Kirk
           //"c", //Moaning Knight
           //"c", //Rapier Champion
           //"c", //Silver Knight Ledo
-          //"c0000_0012", //Sir Vilhelm
+            "c0000_0011", //Sir Vilhelm (Meet)
+            "c0000_0012", //Sir Vilhelm (Combat)
+
+            //Other enemies
+            "c1380_0009", //Man Serpent Summoner(Drakeblood Knights)
+            "c1380_0001", //Man Serpent Summoner(Rapier Champion)
+          //"c6250_0002", //Angle 1
+          //"c6250_0000", //Angle 2
+          //"c6250_0001", //Angle 3
+            "c1290_0000", //Gertrude's Knights 1
+            "c1290_0001", //Gertrude's Knights 2
+            "c1290_0002", //Gertrude's Knights 3
+            "c3141_0000", //Pus of Man (Twin wyvern, white)
+            "c3141_0001", //Pus of Man (Twin wyvern, brown)
+            "c3080_0004", //Pilgrim Butterfly 1
+            "c3080_0000", //Pilgrim Butterfly 2
+            "c2140_0001", //Basilisk 1 ()
+            "c2140_0002", //Basilisk 2
+            "c2140_0003", //Basilisk 3
+            "c2140_0004", //Basilisk 4
+            "c2140_0005", //Basilisk 5
         };
 
         private static readonly string[] ID_FRIENDLY_NPC = new string[]
@@ -99,31 +130,35 @@ namespace StraySouls
             "c0000_0026", //Anri of Astora (Road of Sacrifice)
             "c0000_0007", //Anri of Astora (Cathedral of Deep)
             "c3190_0000", //Blacksmith Andre
-          //"c", //Company Captain Yorshka
-          //"c", //Cornyx of the Great Swanp
+            "c2170_0000", //Company Captain Yorshka
+            "c0000_0013", //Cornyx of the Great Swanp (Undead Settlement)
+            "c0000_0018", //Cornyx of the Great Swanp (Firelink Shrine)
             "c3250_0000", //Emma, High Priestess of Lothric Castle
             "c0000_0014", //Eygon of Carim
             "c0000_0004", //Eygon of Carim (Irina death?)
           //"c", //Filianore
           //"c", //Forlorn Corvian Settler (Slab holder)
-          //"c", //Greirat of the Undead Settlement
+            "c0000_0020", //Greirat of the Undead Settlement (High Wall of Lothric)
+          //"c0000_0020", //Greirat of the Undead Settlement (Firelink Shrine)
             "c0000_0033", //Hawkwood the Deserter
             "c0000_0022", //Hawkwood the Deserter (Farron Keep)
             "c0000_0023", //Horace the Hushed
             "c0000_0002", //Holy Knight Hodrick
             "c0000_0033", //Holy Knight Hodrick (Road of Sacrifice)
           //"c", //Irina of Carim
-          //"c", //Karla
+            "c0000_0011", //Karla (Irithyll Dungeon)
+            "c0000_0022", //Karla (Firelink Shrine)
             "c0000_0007", //Lion Knight Albert
           //"c", //Londor Pale Shade
             "c1450_0000", //Ludleth of Courland
           //"c", //Old Woman of Londor
-            "c0000_0017", //Orbeck of Vinheim
+            "c0000_0017", //Orbeck of Vinheim (Road of Sacrifice)
+            "c0000_0024", //Orbeck of Vinheim (Firelink Shrine)
           //"c", //Ringfinger Leonhard
-          //"c", //Rosaria, Mother of Rebirth
-          //"c", //Shira, Knight of Filianore
+            "c5210_0000", //Rosaria, Mother of Rebirth
+            "c0000_0005", //Shira, Knight of Filianore
             "c3200_0000", //Shrine Handmaid
-            "c3200_0000", //Shrine Handmaid (Past)
+          //"c3200_0000", //Shrine Handmaid (Past)
             "c0000_0007", //Siegward of Catarina (Meet at elevator)
             "c0000_0016", //Siegward of Catarina (Yhorm)
             "c0000_0006", //Sirris of the Sunless Realms
@@ -132,7 +167,7 @@ namespace StraySouls
             "c0000_0012", //Sword Master
             "c0000_0008", //Sword Master (Phantom, Vordt)
             "c0000_0013", //Sword Master (Phantom, Gundyr)
-          //"c", //The Painter
+            "c6121_0000", //The Painter
             "c0000_0013", //Unbreakable Patches
           //"c", //Yellowfinger Heysel
             "c2160_0000", //Yoel of Londor
