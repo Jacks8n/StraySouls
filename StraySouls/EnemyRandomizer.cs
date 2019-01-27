@@ -29,12 +29,12 @@ namespace StraySouls
             "c5110_0000", //Ludex Gundyr
             "c2240_0000", //Vordt of the Boreal Valley
             "c1320_0000", //Crystal Sage
-            "c1320_x", //Crystal Sage ()
+            "c1320_", //Crystal Sage ()
             "c5220_0000", //Deacons of the Deep ()
-            "c5221_x", //Deacons of the Deep (Stout)
-            "c5222_x", //Deacons of the Deep (Tall)
-            "c5223_x", //Deacons of the Deep (Short)
-            "c5225_x", //Deacons of the Deep (Blue)
+            "c5221_", //Deacons of the Deep (Stout)
+            "c5222_", //Deacons of the Deep (Tall)
+            "c5223_", //Deacons of the Deep (Short)
+            "c5225_", //Deacons of the Deep (Blue)
             "c3040_0000", //Abyss Wathcers (Both P1 and P2)
             "c3040_0001", //Abyss Wathcers (P1, normal)
             "c3040_0002", //Abyss Wathcers (P1, red eyes)
@@ -202,7 +202,7 @@ namespace StraySouls
                      return false;
 
                  if (_skipIDs.Contains(entry.Name))
-                     if (_additionIDs.Contains(entry.Name))
+                     if (_additionIDs.FindIndex(item => entry.Name.StartsWith(item)) > -1)
                          _additionEnemies.Add(new Enemy(entry) { Name = entry.Name + "_c" });
                      else
                          return false;
