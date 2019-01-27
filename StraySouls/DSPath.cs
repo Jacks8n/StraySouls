@@ -27,10 +27,15 @@ namespace StraySouls
             while (string.IsNullOrWhiteSpace(ds3Path) || !ds3Path.EndsWith(FOLDER_PATH_MAPSTUDIO) || !Directory.Exists(ds3Path))
             {
                 Console.WriteLine("Can't find the folder of dark souls 3 mapstudio data.");
-                Console.WriteLine("It looks like ..\\DARK SOULS III\\map\\mapstudio\\");
+                Console.WriteLine("It looks like ..\\DARK SOULS III\\Game\\map\\mapstudio\\");
                 Console.Write("Type the full path manually:");
 
-                ds3Path = Console.ReadLine();
+                ds3Path = Console.ReadLine().Trim();
+
+                if (ds3Path.StartsWith("\""))
+                    ds3Path = ds3Path.Substring(1);
+                if (ds3Path.EndsWith("\""))
+                    ds3Path = ds3Path.Substring(0, ds3Path.Length - 1);
 
                 if (!ds3Path.EndsWith("\\"))
                     ds3Path += "\\";
