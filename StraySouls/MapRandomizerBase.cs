@@ -6,9 +6,9 @@ namespace StraySouls
 {
     public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : MSB3.Entry where TProperties : IRandomizedProperties<TEntry>, new()
     {
-        public void Randomize(IEnumerable<TEntry> entries)
+        public void Randomize(ref List<TEntry> entries)
         {
-            entries = ModifyBeforeRandomize(entries);
+            ModifyBeforeRandomize(entries);
 
             var randomTargets = entries.Where(CanBeRandomized).ToArray();
             var randomProperties = new TProperties[randomTargets.Length];
@@ -25,14 +25,8 @@ namespace StraySouls
                 randomProperties[i].ApplyToEntry(randomTargets[i]);
         }
 
-        protected virtual IEnumerable<TEntry> ModifyBeforeRandomize(IEnumerable<TEntry> entries)
-        {
-            return entries;
-        }
+        protected virtual void ModifyBeforeRandomize(List<TEntry> entries) { }
 
-        protected virtual bool CanBeRandomized(TEntry item)
-        {
-            return true;
-        }
+        protected virtual bool CanBeRandomized(TEntry item) => true;
     }
 }

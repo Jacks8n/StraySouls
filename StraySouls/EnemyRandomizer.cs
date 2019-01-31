@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
 
 namespace StraySouls
@@ -174,56 +175,60 @@ namespace StraySouls
           //"c", //Yuria of Londor
         };
 
+        private const string POSTFIX_CLONE = "_CL";
+
         private readonly List<string> _skipIDs = new List<string>();
 
         private readonly List<string> _additionIDs = new List<string>();
 
         private readonly List<Enemy> _additionEnemies = new List<Enemy>();
 
-        private EnemyRandomizerAddMode _additionMode = EnemyRandomizerAddMode.None;
+        private EnemyRandomizerAddMode _curruntAddMode = EnemyRandomizerAddMode.None;
 
-        public void SetAdditionMode(EnemyRandomizerAddMode mode)
+        public EnemyRandomizer()
         {
-            _additionMode = mode;
             _skipIDs.AddRange(ID_MAIN_BOSS);
             _skipIDs.AddRange(ID_OPTIONAL_BOSS);
             _skipIDs.AddRange(ID_AGGRESSIVE_NPC);
             _skipIDs.AddRange(ID_FRIENDLY_NPC);
-            GetAdditionEnemies();
         }
 
-        protected override IEnumerable<Enemy> ModifyBeforeRandomize(IEnumerable<Enemy> entries)
+        public void SetAdditionMode(EnemyRandomizerAddMode mode)
+        {
+            if (_curruntAddMode == mode)
+                return;
+            _curruntAddMode = mode;
+
+            _additionIDs.Clear();
+
+            if ((mode & EnemyRandomizerAddMode.MainBoss) != 0)
+                _additionIDs.AddRange(ID_MAIN_BOSS);
+            if ((mode & EnemyRandomizerAddMode.OptionalBoss) != 0)
+                _additionIDs.AddRange(ID_OPTIONAL_BOSS);
+            if ((mode & EnemyRandomizerAddMode.AggressiveNPC) != 0)
+                _additionIDs.AddRange(ID_AGGRESSIVE_NPC);
+            if ((mode & EnemyRandomizerAddMode.FriendlyNPC) != 0)
+                _additionIDs.AddRange(ID_FRIENDLY_NPC);
+        }
+
+        protected override void ModifyBeforeRandomize(List<Enemy> entries)
         {
             _additionEnemies.Clear();
 
-            entries = entries.Where(entry =>
-             {
-                 if (ID_MUST_SKIP.Contains(entry.Name))
-                     return false;
-
-                 if (_skipIDs.Contains(entry.Name))
-                     if (_additionIDs.FindIndex(item => entry.Name.StartsWith(item)) > -1)
-                         _additionEnemies.Add(new Enemy(entry) { Name = entry.Name + "_c" });
-                     else
-                         return false;
-
-                 return true;
-             }).Concat(_additionEnemies);
-            return entries;
+            foreach (var item in entries)
+            {
+                string name = item.Name;
+                if (_additionIDs.Contains(name))
+                    _additionEnemies.Add(new Enemy(item) { Name = name + POSTFIX_CLONE});
+            }
+            entries.AddRange(_additionEnemies);
         }
 
-        private void GetAdditionEnemies()
+        protected override bool CanBeRandomized(Enemy item)
         {
-            _additionIDs.Clear();
-
-            if ((_additionMode & EnemyRandomizerAddMode.MainBoss) != 0)
-                _additionIDs.AddRange(ID_MAIN_BOSS);
-            if ((_additionMode & EnemyRandomizerAddMode.OptionalBoss) != 0)
-                _additionIDs.AddRange(ID_OPTIONAL_BOSS);
-            if ((_additionMode & EnemyRandomizerAddMode.AggressiveNPC) != 0)
-                _additionIDs.AddRange(ID_AGGRESSIVE_NPC);
-            if ((_additionMode & EnemyRandomizerAddMode.FriendlyNPC) != 0)
-                _additionIDs.AddRange(ID_FRIENDLY_NPC);
+            string name = item.Name;
+            return !(ID_MUST_SKIP.Contains(name) || _skipIDs.FindIndex(str => name.StartsWith(str)) > -1)
+                || item.Name.EndsWith(POSTFIX_CLONE);
         }
     }
 }

@@ -25,7 +25,8 @@ namespace StraySouls
 
                 string filePath = _mapstudioPath + msbName;
                 MSB3 msb = MSB3.Read(filePath);
-                _randomizer.Randomize(msb.Parts.Enemies);
+
+                _randomizer.Randomize(ref msb.Parts.Enemies);
                 msb.Write(filePath);
             }
 

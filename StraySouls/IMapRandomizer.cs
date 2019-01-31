@@ -3,8 +3,8 @@ using SoulsFormats;
 
 namespace StraySouls
 {
-    public interface IMapRandomizer<T> where T : MSB3.Entry
+    public interface IMapRandomizer<TEntry> where TEntry : MSB3.Entry
     {
-        void Randomize(IEnumerable<T> entries);
+        void Randomize(ref List<TEntry> entries);
     }
 }
