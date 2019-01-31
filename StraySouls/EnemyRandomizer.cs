@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using SoulsFormats;
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
 
 namespace StraySouls
@@ -67,7 +67,7 @@ namespace StraySouls
             "c5180_0000", //Curse-rotted Greatwood*
             "c3050_0000", //Old Demon King
             "c2090_0000", //Oceiros, the Consumed King
-            "c5115_0000", //Champion Gundyr*
+            "c5110_0001", //Champion Gundyr*
             "c3141_0000", //Ancient Wyvern
             "c5030_0000", //The Nameless King (P1)
             "c5010_0000", //The Nameless King (P2)
@@ -137,7 +137,7 @@ namespace StraySouls
             "c3250_0000", //Emma, High Priestess of Lothric Castle
             "c0000_0014", //Eygon of Carim
             "c0000_0004", //Eygon of Carim (Irina death?)
-          //"c", //Filianore
+          //"No ID", //Filianore
           //"c", //Forlorn Corvian Settler (Slab holder)
             "c0000_0020", //Greirat of the Undead Settlement (High Wall of Lothric)
           //"c0000_0020", //Greirat of the Undead Settlement (Firelink Shrine)
@@ -146,7 +146,7 @@ namespace StraySouls
             "c0000_0023", //Horace the Hushed
             "c0000_0002", //Holy Knight Hodrick
             "c0000_0033", //Holy Knight Hodrick (Road of Sacrifice)
-          //"c", //Irina of Carim
+            "c0000_0021", //Irina of Carim
             "c0000_0011", //Karla (Irithyll Dungeon)
             "c0000_0022", //Karla (Firelink Shrine)
             "c0000_0007", //Lion Knight Albert
@@ -169,7 +169,8 @@ namespace StraySouls
             "c0000_0008", //Sword Master (Phantom, Vordt)
             "c0000_0013", //Sword Master (Phantom, Gundyr)
             "c6121_0000", //The Painter
-            "c0000_0013", //Unbreakable Patches
+          //"c0000_0013", //Unbreakable Patches
+            "c0000_0032", //Unbreakable Patches
           //"c", //Yellowfinger Heysel
             "c2160_0000", //Yoel of Londor
           //"c", //Yuria of Londor
@@ -181,7 +182,7 @@ namespace StraySouls
 
         private readonly List<string> _additionIDs = new List<string>();
 
-        private readonly List<Enemy> _additionEnemies = new List<Enemy>();
+        private readonly List<EnemyRandomProperties> _additionEnemies = new List<EnemyRandomProperties>();
 
         private EnemyRandomizerAddMode _curruntAddMode = EnemyRandomizerAddMode.None;
 
@@ -219,16 +220,25 @@ namespace StraySouls
             {
                 string name = item.Name;
                 if (_additionIDs.Contains(name))
-                    _additionEnemies.Add(new Enemy(item) { Name = name + POSTFIX_CLONE});
+                    _additionEnemies.Add(new EnemyRandomProperties(item));
             }
-            entries.AddRange(_additionEnemies);
         }
 
         protected override bool CanBeRandomized(Enemy item)
         {
             string name = item.Name;
-            return !(ID_MUST_SKIP.Contains(name) || _skipIDs.FindIndex(str => name.StartsWith(str)) > -1)
-                || item.Name.EndsWith(POSTFIX_CLONE);
+            return !(ID_MUST_SKIP.Contains(name) || _skipIDs.FindIndex(str => name.StartsWith(str)) > -1);
+        }
+
+        protected override void ModifyAfterRandomize(List<Enemy> entries)
+        {
+            for (int i = 0; i < _randomizableEntries.Length && i < _additionEnemies.Count; i++)
+            {
+                var clone = new Enemy(_randomizableEntries[i]);
+                _additionEnemies[i].ApplyToEntry(clone);
+                clone.Name += POSTFIX_CLONE;
+                entries.Add(clone);
+            }
         }
     }
 }

@@ -15,6 +15,13 @@ namespace StraySouls
         private int _thinkParamID;
 
         private int _eventEntityID;
+
+        public EnemyRandomProperties() { }
+
+        public EnemyRandomProperties(Enemy enemy)
+        {
+            RecordProperty(enemy);
+        }
         
         public void RecordProperty(Enemy enemy)
         {
