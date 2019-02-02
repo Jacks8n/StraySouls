@@ -6,10 +6,14 @@ namespace StraySouls
 {
     public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : MSB3.Entry where TProperties : IRandomizedProperties<TEntry>, new()
     {
+        public delegate void EnemyRandomDelegate(TEntry[] availabelEntries, TProperties[] matchingProperties, List<TEntry> msbEnemies);
+
+        public event EnemyRandomDelegate AfterRandomize;
+
         protected TEntry[] _randomizableEntries { get; private set; }
         protected TProperties[] _randomizeProperties { get; private set; }
 
-        public void Randomize(ref List<TEntry> entries)
+        public void Randomize(List<TEntry> entries)
         {
             ModifyBeforeRandomize(entries);
 
@@ -28,6 +32,16 @@ namespace StraySouls
                 _randomizeProperties[i].ApplyToEntry(_randomizableEntries[i]);
 
             ModifyAfterRandomize(entries);
+            AfterRandomize?.Invoke(_randomizableEntries, _randomizeProperties, entries);
+
+            Clear();
+        }
+
+        public virtual void Clear()
+        {
+            AfterRandomize = null;
+            _randomizableEntries = null;
+            _randomizeProperties = null;
         }
 
         protected virtual void ModifyBeforeRandomize(List<TEntry> entries) { }

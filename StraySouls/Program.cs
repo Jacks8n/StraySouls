@@ -12,10 +12,12 @@ namespace StraySouls
             Console.WriteLine("Enter \"backup\" to start creating backups");
             Console.WriteLine("Enter \"restore\" to start restoring");
             Console.WriteLine("Available \"random\" arguments:");
-            Console.WriteLine("\t-m: Randomize main boss additionally");
-            Console.WriteLine("\t-o: Randomize optional boss additionally");
-            Console.WriteLine("\t-f: Randomize friendly NPCs additionally (TODO)");
-            Console.WriteLine("\t-a: Randomize aggressive NPCs additionally (TODO)");
+            Console.WriteLine("\t-m\t: Randomize main boss additionally");
+            Console.WriteLine("\t-o\t: Randomize optional boss additionally");
+            Console.WriteLine("\t-f\t: Randomize friendly NPCs additionally (TODO)");
+            Console.WriteLine("\t-a\t: Randomize aggressive NPCs additionally (TODO)");
+            Console.WriteLine("\t-2 ~ -9\t: Multiply enemies by the number given, for example, -3 means multiplying enemies by three times");
+            Console.WriteLine("Just type random like:\nInput>>random\nOr use arguments like:\nInput>>random -m -o -2");
 
             bool ifContinue = false;
             do

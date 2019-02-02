@@ -4,7 +4,7 @@ namespace StraySouls
 {
     public static partial class CommandInput
     {
-        private class RestoreCommand : ICommand
+        public class RestoreCommand : ICommand
         {
             public void Command(string msbName, char[] args)
             {

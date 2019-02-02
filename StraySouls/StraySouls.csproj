@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayExtension.cs" />
+    <Compile Include="Input\Arguments\CommandArgCollection.cs" />
+    <Compile Include="Input\Arguments\EnemyRandomArgs.cs" />
     <Compile Include="Input\CommandInput.BackupCommand.cs" />
     <Compile Include="Input\CommandInput.cs" />
     <Compile Include="DSPath.cs" />
@@ -71,11 +73,14 @@
     <Compile Include="Input\CommandInput.RestoreCommand.cs" />
     <Compile Include="Input\ICommand.cs" />
     <Compile Include="IMapRandomizer.cs" />
+    <Compile Include="Input\Arguments\ICommandArg.cs" />
     <Compile Include="IRandomizedProperties.cs" />
     <Compile Include="MapRandomizerBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EnemyRandomProperties.cs" />
+    <Compile Include="TreasureRandomizer.cs" />
+    <Compile Include="TreasureRandomProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
