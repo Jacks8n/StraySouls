@@ -46,7 +46,12 @@ namespace StraySouls
         {
             _skipIDs.AddRange(IDs);
             if (asAddition)
-                _additionIDs.AddRange(IDs);
+                AddAdditionIDs(IDs);
+        }
+
+        public void AddAdditionIDs(IEnumerable<string> IDs)
+        {
+            _additionIDs.AddRange(IDs);
         }
         
         protected override void ModifyBeforeRandomize(List<Enemy> entries)

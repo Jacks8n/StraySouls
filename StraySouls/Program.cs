@@ -4,9 +4,13 @@ namespace StraySouls
 {
     public class Program
     {
+        public static bool VOLATILE_ENABLED { get; private set; } = false;
+
         private static void Main(string[] args)
         {
+            Console.WriteLine($"Version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}");
             Console.WriteLine("Map data folder found: {0}", DSPath.GetDS3MapStudioPath());
+            Console.WriteLine("CAUTION: Type \"volatile\" to enable volatile randomization, don't use it unless you don't mind glitches");
             Console.WriteLine();
             Console.WriteLine("Enter \"random\" to start randomizing");
             Console.WriteLine("Enter \"backup\" to start creating backups");
@@ -18,24 +22,35 @@ namespace StraySouls
             Console.WriteLine("\t-a\t: Randomize aggressive NPCs additionally (TODO)");
             Console.WriteLine("\t-2 ~ -9\t: Multiply enemies by the number given, for example, -3 means multiplying enemies by three times");
             Console.WriteLine("Just type random like:\nInput>>random\nOr use arguments like:\nInput>>random -m -o -2");
+            
+            string command;
 
-            bool ifContinue = false;
-            do
+            while(true)
             {
                 Console.Write("\nInput>>");
 
-                string command = Console.ReadLine();
+                command = Console.ReadLine();
+
+                if (command == "volatile")
+                {
+                    VOLATILE_ENABLED ^= true;
+                    Console.WriteLine($"Volatile random {(VOLATILE_ENABLED ? "enabled" : "disabled")}");
+                    continue;
+                }
 
                 Console.WriteLine("Processing, DONT QUIT");
                 if (CommandInput.Command(command))
                     Console.Write("Operation finished!");
                 else
-                    Console.Write("Check out the input, something is wrong.");
+                {
+                    Console.Write("Check out the input, something is wrong");
+                }
                 Console.Write(" Press \'r\' to do other operations\n");
                 Console.WriteLine("Press other keys to exit, and remember to use UXM to patch if any changes have taken place");
 
-                ifContinue = Console.ReadKey().Key == ConsoleKey.R;
-            } while (ifContinue);
+                if (Console.ReadKey().Key != ConsoleKey.R)
+                    break;
+            }
         }
     }
 }

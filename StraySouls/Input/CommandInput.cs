@@ -24,11 +24,11 @@ namespace StraySouls
             "m38_00_00_00.msb.dcx",
             "m39_00_00_00.msb.dcx",
             "m40_00_00_00.msb.dcx",
-            "m41_00_00_00.msb.dcx", //Firelink Shrine
+            "m41_00_00_00.msb.dcx", //Firelink Shrine, Soul of Cinder
             "m45_00_00_00.msb.dcx",
             "m50_00_00_00.msb.dcx",
             "m51_00_00_00.msb.dcx",
-          //"m51_01_00_00.msb.dcx", //Filianore's Rest
+            "m51_01_00_00.msb.dcx", //Filianore's Rest
         };
 
         private static string _mapstudioPath;

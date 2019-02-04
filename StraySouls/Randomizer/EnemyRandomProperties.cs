@@ -2,12 +2,12 @@
 
 namespace StraySouls
 {
-    public class EnemyRandomProperties : IRandomizedProperties<Enemy>
+    public class EnemyRandomProperties : IRandomProperties<Enemy>
     {
         private string _modelName;
 
         private int _talkID;
-        
+
         private int _NPCParamID;
 
         private int _charaInitID;
@@ -22,7 +22,7 @@ namespace StraySouls
         {
             RecordProperty(enemy);
         }
-        
+
         public void RecordProperty(Enemy enemy)
         {
             _modelName = enemy.ModelName;

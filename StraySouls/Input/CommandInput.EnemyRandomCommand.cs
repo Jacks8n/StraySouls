@@ -18,7 +18,7 @@ namespace StraySouls
 
             public EnemyRandomizer Randomizer { get; } = new EnemyRandomizer();
 
-            private CommandArgCollection<EnemyRandomCommand> _availableArgs = new CommandArgCollection<EnemyRandomCommand>();
+            private readonly CommandArgCollection<EnemyRandomCommand> _availableArgs = new CommandArgCollection<EnemyRandomCommand>();
 
             public void Command(string msbName, char[] args)
             {
@@ -28,8 +28,8 @@ namespace StraySouls
                 MSB3 msb = MSB3.Read(filePath);
 
                 AVAILABLE_ARGS.AppendArgsTo(this, args);
-
                 Randomizer.Randomize(msb.Parts.Enemies);
+                
                 msb.Write(filePath);
             }
         }

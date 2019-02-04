@@ -4,7 +4,7 @@ using SoulsFormats;
 
 namespace StraySouls
 {
-    public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : MSB3.Entry where TProperties : IRandomizedProperties<TEntry>, new()
+    public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : MSB3.Entry where TProperties : IRandomProperties<TEntry>, new()
     {
         public delegate void EnemyRandomDelegate(TEntry[] availabelEntries, TProperties[] matchingProperties, List<TEntry> msbEnemies);
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
 using EnemyRandomCommand = StraySouls.CommandInput.EnemyRandomCommand;
 
@@ -20,7 +21,15 @@ namespace StraySouls
             /// <param name="enabled">If this argument is enabled or not</param>
             public void GetCommandArg(EnemyRandomCommand command, bool enabled)
             {
-                command.Randomizer.AddSkipIDs(_skipIDs, enabled);
+                if (Program.VOLATILE_ENABLED)
+                {
+                    if (enabled)
+                        command.Randomizer.AddAdditionIDs(_skipIDs);
+                }
+                else
+                {
+                    command.Randomizer.AddSkipIDs(_skipIDs, enabled);
+                }
             }
         }
 
@@ -30,19 +39,21 @@ namespace StraySouls
             {
             "c5110_0000", //Ludex Gundyr
             "c2240_0000", //Vordt of the Boreal Valley
-            "c1320_0000", //Crystal Sage
-            "c1320_", //Crystal Sage ()
+          //"c1320_0000", //Crystal Sage
+            "c1320_", //Crystal Sage (Clones)
             "c5220_0000", //Deacons of the Deep ()
             "c5221_", //Deacons of the Deep (Stout)
             "c5222_", //Deacons of the Deep (Tall)
             "c5223_", //Deacons of the Deep (Short)
             "c5225_", //Deacons of the Deep (Blue)
-            "c3040_0000", //Abyss Wathcers (Both P1 and P2)
-            "c3040_0001", //Abyss Wathcers (P1, normal)
-            "c3040_0002", //Abyss Wathcers (P1, red eyes)
+            "c3040_", //Abyss Wathcers
+          //"c3040_0000", //Abyss Wathcers (Both P1 and P2)
+          //"c3040_0001", //Abyss Wathcers (P1, normal)
+          //"c3040_0002", //Abyss Wathcers (P1, red eyes)
             "c5160_0000", //High Lord Wolnir
-            "c5140_0000", //Pontiff Sulyvahn
-            "c5140_0001", //Pontiff Sulyvahn (Phantom)
+            "c5140_", //Pontiff Sulyvahn
+          //"c5140_0000", //Pontiff Sulyvahn
+          //"c5140_0001", //Pontiff Sulyvahn (Phantom)
             "c5150_0001", //Aldrich, Devourer of Gods
             "c5260_0000", //Yhorm the Giant
             "c5270_0001", //Dancer of the Boreal Valley
@@ -83,7 +94,10 @@ namespace StraySouls
             "c6030_0001", //Gravetender Greatwolf (First)
             "c6030_0001", //Gravetender Greatwolf (Second)
             "c6030_0004", //Gravetender Greatwolf (Boss)
-            "c6210_0000", //Darkeater Midir
+            "c6210_0000", //Darkeater Midir (Firtst, hides behind a tower)
+          //"c6210_0000", //Darkeater Midir (Second, breathes fire toward the bridge)
+          //"c6210_0000", //Darkeater Midir (Third, located on a cliff)
+            "c6211_0000", //Darkeater Midir (Boss)
 
             //Mini Boss (Key event)
             "c3060_0001" //Fire Demon
@@ -151,7 +165,9 @@ namespace StraySouls
             //(Some of them might be aggressive at some cases)
             "c1400_0000", //Fire Keeper
             "c0000_0026", //Anri of Astora (Road of Sacrifice)
-            "c0000_0007", //Anri of Astora (Cathedral of Deep)
+            "c0000_0007", //Anri of Astora (Firelink Shrine, after defeating Deacons of Deep)
+            "c0000_0020", //Anri of Astora (Catacombs of Carthus, First)
+            "c0000_0021", //Anri of Astora (Catacombs of Carthus, Second)
             "c3190_0000", //Blacksmith Andre
             "c2170_0000", //Company Captain Yorshka
             "c0000_0013", //Cornyx of the Great Swanp (Undead Settlement)
@@ -159,13 +175,15 @@ namespace StraySouls
             "c3250_0000", //Emma, High Priestess of Lothric Castle
             "c0000_0014", //Eygon of Carim
             "c0000_0004", //Eygon of Carim (Irina death?)
-          //"No ID", //Filianore
+          //"Can't find", //Filianore
           //"c", //Forlorn Corvian Settler (Slab holder)
             "c0000_0020", //Greirat of the Undead Settlement (High Wall of Lothric)
           //"c0000_0020", //Greirat of the Undead Settlement (Firelink Shrine)
             "c0000_0033", //Hawkwood the Deserter
             "c0000_0022", //Hawkwood the Deserter (Farron Keep)
-            "c0000_0023", //Horace the Hushed
+            "c0000_0023", //Horace the Hushed (Road of Sacrifice)
+            "c0000_0010", //Horace the Hushed (Firelink Shrine, after defeating Deacons of Deep)
+            "c0000_0025", //Horace the Hushed (Smouldering Lake)
             "c0000_0002", //Holy Knight Hodrick
             "c0000_0033", //Holy Knight Hodrick (Road of Sacrifice)
             "c0000_0021", //Irina of Carim
@@ -180,11 +198,13 @@ namespace StraySouls
           //"c", //Ringfinger Leonhard
             "c5210_0000", //Rosaria, Mother of Rebirth
             "c0000_0005", //Shira, Knight of Filianore
-            "c3200_0000", //Shrine Handmaid
+            "c3200_", //Shrine Handmaid
+          //"c3200_0000", //Shrine Handmaid
           //"c3200_0000", //Shrine Handmaid (Past)
-            "c0000_0007", //Siegward of Catarina (Meet at elevator)
+            "c0000_0007", //Siegward of Catarina (Meets at elevator)
+            "c0000_0015", //Siegward of Catarina (Helps defeating the fire demon)
             "c0000_0016", //Siegward of Catarina (Yhorm)
-            "c0000_0006", //Sirris of the Sunless Realms
+            "c0000_0006", //Sirris of the Sunless Realms (Firelink Shrine, first)
             "c0000_0019", //Sirris of the Sunless Realms (Cathedral of Deep)
             "c0000_0021", //Slave Knight Gael (Cathedral of Deep)
             "c0000_0012", //Sword Master
@@ -195,7 +215,7 @@ namespace StraySouls
             "c0000_0032", //Unbreakable Patches
           //"c", //Yellowfinger Heysel
             "c2160_0000", //Yoel of Londor
-          //"c", //Yuria of Londor
+            "c0000_0025", //Yuria of Londor
             };
 
             protected override char _argChar => 'f';
@@ -226,7 +246,7 @@ namespace StraySouls
 
             private void Multiply(Enemy[] availableEnemies, EnemyRandomProperties[] matchingProperties, List<Enemy> msbEntries)
             {
-                for (int i = 0; i < _multiplyTimes; i++)
+                for (int i = _multiplyTimes; i > 1; i--)
                     for (int j = 0; j < availableEnemies.Length; j++)
                     {
                         Enemy origin = availableEnemies[j];

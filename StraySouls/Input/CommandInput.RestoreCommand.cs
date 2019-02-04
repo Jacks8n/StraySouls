@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace StraySouls
 {
@@ -8,7 +9,12 @@ namespace StraySouls
         {
             public void Command(string msbName, char[] args)
             {
-                File.Copy(_backupFolderPath + msbName, _mapstudioPath + msbName, overwrite: true);
+                string source = _backupFolderPath + msbName;
+
+                if (File.Exists(source))
+                    File.Copy(_backupFolderPath + msbName, _mapstudioPath + msbName, overwrite: true);
+                else
+                    Console.WriteLine($"{source} backup not found");
             }
         }
     }

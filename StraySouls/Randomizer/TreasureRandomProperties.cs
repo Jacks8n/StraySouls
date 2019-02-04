@@ -2,7 +2,7 @@
 
 namespace StraySouls
 {
-    public class TreasureRandomProperties : IRandomizedProperties<Treasure>
+    public class TreasureRandomProperties : IRandomProperties<Treasure>
     {
         private int _ItemLot1,_ItemLot2;
 
