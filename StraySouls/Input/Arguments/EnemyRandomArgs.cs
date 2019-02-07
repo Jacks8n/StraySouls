@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
 using EnemyRandomCommand = StraySouls.CommandInput.EnemyRandomCommand;
@@ -241,19 +242,41 @@ namespace StraySouls
                 if (!enabled)
                     return;
 
-                command.Randomizer.AfterRandomize += Multiply;
+                command.Randomizer.OnRandomizeEnd += Multiply;
             }
 
             private void Multiply(Enemy[] availableEnemies, EnemyRandomProperties[] matchingProperties, List<Enemy> msbEntries)
             {
+                Random random = new Random();
                 for (int i = _multiplyTimes; i > 1; i--)
                     for (int j = 0; j < availableEnemies.Length; j++)
                     {
-                        Enemy origin = availableEnemies[j];
+                        Enemy origin = availableEnemies[i];
                         Enemy clone = new Enemy(origin) { Name = $"{origin.Name}_c{i}" };
+                        matchingProperties[random.Next(0, availableEnemies.Length)].ApplyToEntry(clone);
                         msbEntries.Add(clone);
                     }
             }
+        }
+
+        public class UnlimitedMode : ICommandArg<EnemyRandomCommand>
+        {
+            public void GetCommandArg(EnemyRandomCommand command, bool enabled)
+            {
+                command.Randomizer.BeforeApply += IndividualRandom;
+            }
+
+            private void IndividualRandom(Enemy[] availableEntries, EnemyRandomProperties[] matchingProperties, List<Enemy> msbEnemies)
+            {
+                Enemy[] temp = new Enemy[matchingProperties.Length];
+                matchingProperties.CopyTo(temp, 0);
+                Random random = new Random();
+
+                for (int i = 0; i < temp.Length; i++)
+                    availableEntries[i] = temp[random.Next(0, temp.Length)];
+            }
+
+            public bool TryEnable(char argChar) => argChar == 'u';
         }
     }
 }

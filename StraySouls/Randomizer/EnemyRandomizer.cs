@@ -53,7 +53,7 @@ namespace StraySouls
         {
             _additionIDs.AddRange(IDs);
         }
-        
+
         protected override void ModifyBeforeRandomize(List<Enemy> entries)
         {
             _additionEnemies.Clear();
@@ -74,9 +74,9 @@ namespace StraySouls
 
         protected override void ModifyAfterRandomize(List<Enemy> entries)
         {
-            for (int i = 0; i < _randomizableEntries.Length && i < _additionEnemies.Count; i++)
+            for (int i = 0; i < _randomizedEntries.Length && i < _additionEnemies.Count; i++)
             {
-                var clone = new Enemy(_randomizableEntries[i]);
+                var clone = new Enemy(_randomizedEntries[i]);
                 _additionEnemies[i].ApplyToEntry(clone);
                 clone.Name += POSTFIX_CLONE;
                 entries.Add(clone);

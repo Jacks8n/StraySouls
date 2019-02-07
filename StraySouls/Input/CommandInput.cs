@@ -34,7 +34,7 @@ namespace StraySouls
         private static string _mapstudioPath;
 
         private static string _backupFolderPath;
-        
+
         /// <summary> Returns whether the input is valid </summary>
         public static bool Command(string input)
         {
@@ -55,7 +55,8 @@ namespace StraySouls
                 }
 
                 for (int i = 0; i < LIST_FILE_RANDOM.Length; i++)
-                    commandEntry.Command(LIST_FILE_RANDOM[i], args.ToArray());
+                    if (System.IO.File.Exists(_mapstudioPath + LIST_FILE_RANDOM[i]))
+                        commandEntry.Command(LIST_FILE_RANDOM[i], args.ToArray());
 
                 return true;
             }

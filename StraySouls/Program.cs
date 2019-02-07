@@ -5,7 +5,7 @@ namespace StraySouls
     public class Program
     {
         public static bool VOLATILE_ENABLED { get; private set; } = false;
-
+        
         private static void Main(string[] args)
         {
             Console.WriteLine($"Version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}");
@@ -21,6 +21,7 @@ namespace StraySouls
             Console.WriteLine("\t-f\t: Randomize friendly NPCs additionally (TODO)");
             Console.WriteLine("\t-a\t: Randomize aggressive NPCs additionally (TODO)");
             Console.WriteLine("\t-2 ~ -9\t: Multiply enemies by the number given, for example, -3 means multiplying enemies by three times");
+            Console.WriteLine("\t-u: Unlimited mode, change enemies individually rather than simply change their positions");
             Console.WriteLine("Just type random like:\nInput>>random\nOr use arguments like:\nInput>>random -m -o -2");
             
             string command;
@@ -42,9 +43,7 @@ namespace StraySouls
                 if (CommandInput.Command(command))
                     Console.Write("Operation finished!");
                 else
-                {
                     Console.Write("Check out the input, something is wrong");
-                }
                 Console.Write(" Press \'r\' to do other operations\n");
                 Console.WriteLine("Press other keys to exit, and remember to use UXM to patch if any changes have taken place");
 
