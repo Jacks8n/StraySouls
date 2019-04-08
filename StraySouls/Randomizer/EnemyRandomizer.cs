@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
-using Enemy = SoulsFormats.MSB3.Part.Enemy;
+using StraySouls.Wrapper;
 
 namespace StraySouls
 {
-    public class EnemyRandomizer : MapRandomizerBase<Enemy, EnemyRandomProperties>
+    public class EnemyRandomizer : MapRandomizerBase<EnemyWrapper, EnemyRandomProperties>
     {
         private static readonly string[] ID_MUST_SKIP = new string[]
         {
@@ -54,7 +53,7 @@ namespace StraySouls
             _additionIDs.AddRange(IDs);
         }
 
-        protected override void ModifyBeforeRandomize(List<Enemy> entries)
+        protected override void ModifyBeforeRandomize(List<EnemyWrapper> entries)
         {
             _additionEnemies.Clear();
 
@@ -66,17 +65,17 @@ namespace StraySouls
             }
         }
 
-        protected override bool CanBeRandomized(Enemy item)
+        protected override bool CanBeRandomized(EnemyWrapper item)
         {
             string name = item.Name;
             return !(ID_MUST_SKIP.Contains(name) || _skipIDs.FindIndex(str => name.StartsWith(str)) > -1);
         }
 
-        protected override void ModifyAfterRandomize(List<Enemy> entries)
+        protected override void ModifyAfterRandomize(List<EnemyWrapper> entries)
         {
             for (int i = 0; i < _randomizedEntries.Length && i < _additionEnemies.Count; i++)
             {
-                var clone = new Enemy(_randomizedEntries[i]);
+                var clone = new EnemyWrapper(_randomizedEntries[i]);
                 _additionEnemies[i].ApplyToEntry(clone);
                 clone.Name += POSTFIX_CLONE;
                 entries.Add(clone);

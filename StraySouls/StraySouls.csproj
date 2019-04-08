@@ -13,6 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,12 +26,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -39,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -65,13 +66,15 @@
     <Compile Include="ArrayExtension.cs" />
     <Compile Include="Input\Arguments\CommandArgCollection.cs" />
     <Compile Include="Input\Arguments\EnemyRandomArgs.cs" />
-    <Compile Include="Input\CommandInput.BackupCommand.cs" />
+    <Compile Include="Input\Commands\BackupCommand.cs" />
     <Compile Include="Input\CommandInput.cs" />
-    <Compile Include="DSPath.cs" />
-    <Compile Include="Input\CommandInput.EnemyRandomCommand.cs" />
+    <Compile Include="GamePath.cs" />
+    <Compile Include="Input\Commands\CommandBase.cs" />
+    <Compile Include="Input\Commands\EnemyRandomCommand.cs" />
+    <Compile Include="Output\CommandOutput.cs" />
     <Compile Include="Randomizer\EnemyRandomizer.cs" />
-    <Compile Include="Input\CommandInput.RestoreCommand.cs" />
-    <Compile Include="Input\ICommand.cs" />
+    <Compile Include="Input\Commands\RestoreCommand.cs" />
+    <Compile Include="Input\Commands\ICommand.cs" />
     <Compile Include="Randomizer\IMapRandomizer.cs" />
     <Compile Include="Input\Arguments\ICommandArg.cs" />
     <Compile Include="Randomizer\IRandomProperties.cs" />
@@ -81,15 +84,12 @@
     <Compile Include="Randomizer\EnemyRandomProperties.cs" />
     <Compile Include="Randomizer\TreasureRandomizer.cs" />
     <Compile Include="Randomizer\TreasureRandomProperties.cs" />
+    <Compile Include="TargetGame.cs" />
+    <Compile Include="Wrapper\EnemyWrapper.cs" />
+    <Compile Include="Wrapper\ISFWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="G:\GitSource\SoulsFormats\SoulsFormats\SoulsFormats.csproj">
-      <Project>{22c664bd-877b-44df-8ecf-2808522469a8}</Project>
-      <Name>SoulsFormats</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
@@ -102,6 +102,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SoulsFormats\SoulsFormats\SoulsFormats.csproj">
+      <Project>{22c664bd-877b-44df-8ecf-2808522469a8}</Project>
+      <Name>SoulsFormats</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

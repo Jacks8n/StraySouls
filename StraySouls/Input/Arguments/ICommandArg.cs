@@ -1,8 +1,8 @@
-﻿namespace StraySouls
+﻿namespace StraySouls.Input
 {
     public interface ICommandArg<in TCommand> where TCommand : class, ICommand
     {
-        bool TryEnable(char argChar);
+        bool TryEnable(string argChar);
 
         void GetCommandArg(TCommand command, bool enabled);
     }

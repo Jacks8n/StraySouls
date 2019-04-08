@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using SoulsFormats;
+using StraySouls.Wrapper;
 
 namespace StraySouls
 {
-    public interface IMapRandomizer<TEntry> where TEntry : MSB3.Entry
+    public interface IMapRandomizer<TEntry> where TEntry : ISFWrapper
     {
         void Randomize(List<TEntry> entries);
     }

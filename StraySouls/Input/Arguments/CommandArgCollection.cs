@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace StraySouls
+namespace StraySouls.Input
 {
     public class CommandArgCollection<TCommand> where TCommand : class, ICommand
     {
@@ -12,7 +12,7 @@ namespace StraySouls
             args.CopyTo(_commandArgs, index: 0);
         }
 
-        public void AppendArgsTo(TCommand command, char[] charArgs)
+        public void AppendArgsTo(TCommand command, string[] charArgs)
         {
             for (int i = 0; i < _commandArgs.Length; i++)
             {

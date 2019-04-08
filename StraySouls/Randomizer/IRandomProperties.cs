@@ -1,8 +1,8 @@
-﻿using SoulsFormats;
+﻿using StraySouls.Wrapper;
 
 namespace StraySouls
 {
-    public interface IRandomProperties<T> where T : MSB3.Entry
+    public interface IRandomProperties<T> where T : ISFWrapper
     {
         void RecordProperty(T entry);
 

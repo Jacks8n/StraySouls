@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SoulsFormats;
+using StraySouls.Wrapper;
 
 namespace StraySouls
 {
-    public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : MSB3.Entry where TProperties : IRandomProperties<TEntry>, new()
+    public abstract class MapRandomizerBase<TEntry, TProperties> : IMapRandomizer<TEntry> where TEntry : ISFWrapper where TProperties : IRandomProperties<TEntry>, new()
     {
         public delegate void EnemyRandomDelegate(TEntry[] availableEntries, TProperties[] matchingProperties, List<TEntry> msbEnemies);
 

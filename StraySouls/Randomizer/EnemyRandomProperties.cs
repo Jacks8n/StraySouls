@@ -1,8 +1,8 @@
-﻿using Enemy = SoulsFormats.MSB3.Part.Enemy;
+﻿using StraySouls.Wrapper;
 
 namespace StraySouls
 {
-    public class EnemyRandomProperties : IRandomProperties<Enemy>
+    public class EnemyRandomProperties : IRandomProperties<EnemyWrapper>
     {
         private string _modelName;
 
@@ -18,12 +18,12 @@ namespace StraySouls
 
         public EnemyRandomProperties() { }
 
-        public EnemyRandomProperties(Enemy enemy)
+        public EnemyRandomProperties(EnemyWrapper enemy)
         {
             RecordProperty(enemy);
         }
 
-        public void RecordProperty(Enemy enemy)
+        public void RecordProperty(EnemyWrapper enemy)
         {
             _modelName = enemy.ModelName;
             _NPCParamID = enemy.NPCParamID;
@@ -33,7 +33,7 @@ namespace StraySouls
             _talkID = enemy.TalkID;
         }
 
-        public void ApplyToEntry(Enemy enemy)
+        public void ApplyToEntry(EnemyWrapper enemy)
         {
             enemy.ModelName = _modelName;
             enemy.NPCParamID = _NPCParamID;

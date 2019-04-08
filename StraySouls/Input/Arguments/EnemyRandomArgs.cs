@@ -2,35 +2,26 @@
 using System.Collections.Generic;
 
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
-using EnemyRandomCommand = StraySouls.CommandInput.EnemyRandomCommand;
 
-namespace StraySouls
+namespace StraySouls.Input
 {
     public static class EnemyRandomArgs
     {
         public abstract class RandomListBase : ICommandArg<EnemyRandomCommand>
         {
-            protected abstract char _argChar { get; }
+            protected abstract string ArgChar { get; }
 
             protected abstract IEnumerable<string> _skipIDs { get; }
 
-            public bool TryEnable(char charArg)
+            public bool TryEnable(string charArg)
             {
-                return charArg == _argChar;
+                return charArg == ArgChar;
             }
 
             /// <param name="enabled">If this argument is enabled or not</param>
             public void GetCommandArg(EnemyRandomCommand command, bool enabled)
             {
-                if (Program.VOLATILE_ENABLED)
-                {
-                    if (enabled)
-                        command.Randomizer.AddAdditionIDs(_skipIDs);
-                }
-                else
-                {
-                    command.Randomizer.AddSkipIDs(_skipIDs, enabled);
-                }
+                command.Randomizer.AddSkipIDs(_skipIDs, enabled);
             }
         }
 
@@ -75,7 +66,7 @@ namespace StraySouls
             "c6300_0003", //Slave Knight Gael (P2)
             };
 
-            protected override char _argChar => 'm';
+            protected override string ArgChar => "m";
 
             protected override IEnumerable<string> _skipIDs => ID_MAIN_BOSS;
         }
@@ -104,7 +95,7 @@ namespace StraySouls
             "c3060_0001" //Fire Demon
             };
 
-            protected override char _argChar => 'o';
+            protected override string ArgChar => "o";
 
             protected override IEnumerable<string> _skipIDs => ID_OPTIONAL_BOSS;
         }
@@ -154,7 +145,7 @@ namespace StraySouls
             "c2140_0005", //Basilisk 5
             };
 
-            protected override char _argChar => 'a';
+            protected override string ArgChar => "a";
 
             protected override IEnumerable<string> _skipIDs => ID_AGGRESSIVE_NPC;
         }
@@ -219,7 +210,7 @@ namespace StraySouls
             "c0000_0025", //Yuria of Londor
             };
 
-            protected override char _argChar => 'f';
+            protected override string ArgChar => "f";
 
             protected override IEnumerable<string> _skipIDs => ID_FRIENDLY_NPC;
         }
@@ -231,9 +222,9 @@ namespace StraySouls
 
             private int _multiplyTimes = MULTIPLY_MINIMUM;
 
-            public bool TryEnable(char argChar)
+            public bool TryEnable(string argChar)
             {
-                return int.TryParse(argChar.ToString(), out _multiplyTimes)
+                return int.TryParse(argChar, out _multiplyTimes)
                     && _multiplyTimes >= MULTIPLY_MINIMUM && _multiplyTimes <= MULTIPLY_MAXIMUM;
             }
 
@@ -251,8 +242,8 @@ namespace StraySouls
                 for (int i = _multiplyTimes; i > 1; i--)
                     for (int j = 0; j < availableEnemies.Length; j++)
                     {
-                        Enemy origin = availableEnemies[i];
-                        Enemy clone = new Enemy(origin) { Name = $"{origin.Name}_c{i}" };
+                        Enemy origin = availableEnemies[j];
+                        Enemy clone = new Enemy(origin) { Name = $"{origin.Name}_c{i}", EventEntityID = -1 };
                         matchingProperties[random.Next(0, availableEnemies.Length)].ApplyToEntry(clone);
                         msbEntries.Add(clone);
                     }
@@ -261,6 +252,8 @@ namespace StraySouls
 
         public class UnlimitedMode : ICommandArg<EnemyRandomCommand>
         {
+            public bool TryEnable(string argChar) => argChar == "u";
+
             public void GetCommandArg(EnemyRandomCommand command, bool enabled)
             {
                 command.Randomizer.BeforeApply += IndividualRandom;
@@ -275,8 +268,6 @@ namespace StraySouls
                 for (int i = 0; i < temp.Length; i++)
                     availableEntries[i] = temp[random.Next(0, temp.Length)];
             }
-
-            public bool TryEnable(char argChar) => argChar == 'u';
         }
     }
 }
