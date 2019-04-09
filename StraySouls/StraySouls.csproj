@@ -82,8 +82,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomizer\EnemyRandomProperties.cs" />
-    <Compile Include="Randomizer\TreasureRandomizer.cs" />
-    <Compile Include="Randomizer\TreasureRandomProperties.cs" />
     <Compile Include="TargetGame.cs" />
     <Compile Include="Wrapper\EnemyWrapper.cs" />
     <Compile Include="Wrapper\ISFWrapper.cs" />
@@ -108,6 +106,11 @@
       <Project>{22c664bd-877b-44df-8ecf-2808522469a8}</Project>
       <Name>SoulsFormats</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="oo2core_6_win64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

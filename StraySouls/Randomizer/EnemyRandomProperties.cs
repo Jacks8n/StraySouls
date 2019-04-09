@@ -16,6 +16,8 @@ namespace StraySouls
 
         private int _eventEntityID;
 
+        private int _eventFlagID;
+
         public EnemyRandomProperties() { }
 
         public EnemyRandomProperties(EnemyWrapper enemy)
@@ -31,6 +33,7 @@ namespace StraySouls
             _eventEntityID = enemy.EventEntityID;
             _charaInitID = enemy.CharaInitID;
             _talkID = enemy.TalkID;
+            _eventFlagID = enemy.EventFlagID;
         }
 
         public void ApplyToEntry(EnemyWrapper enemy)
@@ -41,6 +44,7 @@ namespace StraySouls
             enemy.EventEntityID = _eventEntityID;
             enemy.CharaInitID = _charaInitID;
             enemy.TalkID = _talkID;
+            enemy.EventFlagID = _eventFlagID;
         }
     }
 }

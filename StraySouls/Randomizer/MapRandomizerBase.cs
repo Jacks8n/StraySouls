@@ -9,42 +9,45 @@ namespace StraySouls
         public delegate void EnemyRandomDelegate(TEntry[] availableEntries, TProperties[] matchingProperties, List<TEntry> msbEnemies);
 
         public event EnemyRandomDelegate BeforeApply;
+
         public event EnemyRandomDelegate OnRandomizeEnd;
 
-        protected TEntry[] _randomizedEntries { get; private set; }
-        protected TProperties[] _randomizeProperties { get; private set; }
+        protected TEntry[] RandomizedEntries { get; private set; }
 
-        public void Randomize(List<TEntry> entries)
+        protected TProperties[] RandomizeProperties { get; private set; }
+
+        public List<TEntry> Randomize(List<TEntry> entries)
         {
             ModifyBeforeRandomize(entries);
 
-            _randomizedEntries = entries.Where(CanBeRandomized).ToArray();
-            _randomizeProperties = new TProperties[_randomizedEntries.Length];
+            RandomizedEntries = entries.Where(CanBeRandomized).ToArray();
+            RandomizeProperties = new TProperties[RandomizedEntries.Length];
 
-            for (int i = 0; i < _randomizedEntries.Length; i++)
+            for (int i = 0; i < RandomizedEntries.Length; i++)
             {
                 var properties = new TProperties();
-                properties.RecordProperty(_randomizedEntries[i]);
-                _randomizeProperties[i] = properties;
+                properties.RecordProperty(RandomizedEntries[i]);
+                RandomizeProperties[i] = properties;
             }
 
-            _randomizedEntries.Shuffle();
-            BeforeApply?.Invoke(_randomizedEntries, _randomizeProperties, entries);
-            for (int i = 0; i < _randomizedEntries.Length; i++)
-                _randomizeProperties[i].ApplyToEntry(_randomizedEntries[i]);
+            RandomizedEntries.Shuffle();
+            BeforeApply?.Invoke(RandomizedEntries, RandomizeProperties, entries);
+            for (int i = 0; i < RandomizedEntries.Length; i++)
+                RandomizeProperties[i].ApplyToEntry(RandomizedEntries[i]);
 
             ModifyAfterRandomize(entries);
-            OnRandomizeEnd?.Invoke(_randomizedEntries, _randomizeProperties, entries);
+            OnRandomizeEnd?.Invoke(RandomizedEntries, RandomizeProperties, entries);
 
             Clear();
+            return entries;
         }
 
         public virtual void Clear()
         {
             BeforeApply = null;
             OnRandomizeEnd = null;
-            _randomizedEntries = null;
-            _randomizeProperties = null;
+            RandomizedEntries = null;
+            RandomizeProperties = null;
         }
 
         protected virtual void ModifyBeforeRandomize(List<TEntry> entries) { }

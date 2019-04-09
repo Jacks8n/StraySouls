@@ -73,9 +73,9 @@ namespace StraySouls
 
         protected override void ModifyAfterRandomize(List<EnemyWrapper> entries)
         {
-            for (int i = 0; i < _randomizedEntries.Length && i < _additionEnemies.Count; i++)
+            for (int i = 0; i < RandomizedEntries.Length && i < _additionEnemies.Count; i++)
             {
-                var clone = new EnemyWrapper(_randomizedEntries[i]);
+                var clone = new EnemyWrapper(RandomizedEntries[i]);
                 _additionEnemies[i].ApplyToEntry(clone);
                 clone.Name += POSTFIX_CLONE;
                 entries.Add(clone);

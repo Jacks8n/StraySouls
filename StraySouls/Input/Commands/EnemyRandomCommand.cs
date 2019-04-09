@@ -1,4 +1,6 @@
-﻿using SoulsFormats;
+﻿using System.Linq;
+using SoulsFormats;
+using StraySouls.Wrapper;
 
 namespace StraySouls.Input
 {
@@ -20,19 +22,18 @@ namespace StraySouls.Input
         {
             Randomizer.Clear();
 
-            //TODO
             string filePath = GamePath.GetMapStudioPath() + msbName;
             switch (game)
             {
                 case Game.DS3:
                     MSB3 msb3 = MSB3.Read(filePath);
-                    Randomizer.Randomize(msb3.Parts.Enemies);
+                    EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msb3.Parts.Enemies).ToList()), msb3.Parts.Enemies);
                     msb3.Write(filePath);
                     break;
                 case Game.Sekiro:
-                    MSBN msbn = MSBN.Read(filePath);
-
-                    msbn.Write(filePath);
+                    MSBS msbs = MSBS.Read(filePath);
+                    EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msbs.Parts.Enemies).ToList()), msbs.Parts.Enemies);
+                    msbs.Write(filePath);
                     break;
             }
         }

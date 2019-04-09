@@ -65,8 +65,8 @@ namespace StraySouls.Input
             if (TABLE_COMMANDS.TryGetValue(command, out ICommand commandEntry))
             {
                 for (int i = 0; i < fileList.Length; i++)
-                    if (File.Exists(GamePath.GetMapStudioPath() + LIST_FILE_RANDOM_DS3[i]))
-                        commandEntry.Command(game, LIST_FILE_RANDOM_DS3[i], args);
+                    if (File.Exists(GamePath.GetMapStudioPath() + fileList[i]))
+                        commandEntry.Command(game, fileList[i], args);
 
                 return true;
             }

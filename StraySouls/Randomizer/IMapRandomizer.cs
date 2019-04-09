@@ -5,6 +5,6 @@ namespace StraySouls
 {
     public interface IMapRandomizer<TEntry> where TEntry : ISFWrapper
     {
-        void Randomize(List<TEntry> entries);
+        List<TEntry> Randomize(List<TEntry> entries);
     }
 }

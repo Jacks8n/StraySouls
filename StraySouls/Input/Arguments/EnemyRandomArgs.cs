@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Enemy = SoulsFormats.MSB3.Part.Enemy;
+using StraySouls.Wrapper;
 
 namespace StraySouls.Input
 {
@@ -236,14 +235,14 @@ namespace StraySouls.Input
                 command.Randomizer.OnRandomizeEnd += Multiply;
             }
 
-            private void Multiply(Enemy[] availableEnemies, EnemyRandomProperties[] matchingProperties, List<Enemy> msbEntries)
+            private void Multiply(EnemyWrapper[] availableEnemies, EnemyRandomProperties[] matchingProperties, List<EnemyWrapper> msbEntries)
             {
                 Random random = new Random();
                 for (int i = _multiplyTimes; i > 1; i--)
                     for (int j = 0; j < availableEnemies.Length; j++)
                     {
-                        Enemy origin = availableEnemies[j];
-                        Enemy clone = new Enemy(origin) { Name = $"{origin.Name}_c{i}", EventEntityID = -1 };
+                        EnemyWrapper origin = availableEnemies[j];
+                        EnemyWrapper clone = new EnemyWrapper(origin) { Name = $"{origin.Name}_c{i}", EventEntityID = -1 };
                         matchingProperties[random.Next(0, availableEnemies.Length)].ApplyToEntry(clone);
                         msbEntries.Add(clone);
                     }
@@ -259,9 +258,9 @@ namespace StraySouls.Input
                 command.Randomizer.BeforeApply += IndividualRandom;
             }
 
-            private void IndividualRandom(Enemy[] availableEntries, EnemyRandomProperties[] matchingProperties, List<Enemy> msbEnemies)
+            private void IndividualRandom(EnemyWrapper[] availableEntries, EnemyRandomProperties[] matchingProperties, List<EnemyWrapper> msbEnemies)
             {
-                Enemy[] temp = new Enemy[matchingProperties.Length];
+                EnemyWrapper[] temp = new EnemyWrapper[matchingProperties.Length];
                 matchingProperties.CopyTo(temp, 0);
                 Random random = new Random();
 
