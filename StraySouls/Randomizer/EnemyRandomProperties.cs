@@ -2,7 +2,7 @@
 
 namespace StraySouls
 {
-    public class EnemyRandomProperties : IRandomProperties<EnemyWrapper>
+    public struct EnemyRandomProperties : IRandomProperties<EnemyWrapper>
     {
         private string _modelName;
 
@@ -18,11 +18,18 @@ namespace StraySouls
 
         private int _eventFlagID;
 
-        public EnemyRandomProperties() { }
+        private int _entityID;
 
         public EnemyRandomProperties(EnemyWrapper enemy)
         {
-            RecordProperty(enemy);
+            _modelName = enemy.ModelName;
+            _NPCParamID = enemy.NPCParamID;
+            _thinkParamID = enemy.ThinkParamID;
+            _eventEntityID = enemy.EventEntityID;
+            _charaInitID = enemy.CharaInitID;
+            _talkID = enemy.TalkID;
+            _eventFlagID = enemy.EventFlagID;
+            _entityID = enemy.EntityID;
         }
 
         public void RecordProperty(EnemyWrapper enemy)
@@ -34,6 +41,7 @@ namespace StraySouls
             _charaInitID = enemy.CharaInitID;
             _talkID = enemy.TalkID;
             _eventFlagID = enemy.EventFlagID;
+            _entityID = enemy.EntityID;
         }
 
         public void ApplyToEntry(EnemyWrapper enemy)
@@ -45,6 +53,7 @@ namespace StraySouls
             enemy.CharaInitID = _charaInitID;
             enemy.TalkID = _talkID;
             enemy.EventFlagID = _eventFlagID;
+            enemy.EntityID = _entityID;
         }
     }
 }

@@ -223,6 +223,32 @@ namespace StraySouls.Wrapper
             }
         }
 
+        /// <summary>
+        /// Sekiro only
+        /// </summary>
+        public int EntityID
+        {
+            get
+            {
+                switch (TargetGame.Game)
+                {
+                    case Game.Sekiro:
+                        return _sekiroEnemy.EntityID;
+                    default:
+                        return -1;
+                }
+            }
+            set
+            {
+                switch (TargetGame.Game)
+                {
+                    case Game.Sekiro:
+                        _sekiroEnemy.EntityID = value;
+                        break;
+                }
+            }
+        }
+
         private MSB3.Part.Enemy _ds3Enemy = null;
 
         private MSBS.Part.Enemy _sekiroEnemy = null;

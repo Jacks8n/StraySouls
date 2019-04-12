@@ -8,13 +8,13 @@ namespace StraySouls.Input
     {
         public abstract class RandomListBase : ICommandArg<EnemyRandomCommand>
         {
-            protected abstract string ArgChar { get; }
+            protected abstract string ArgString { get; }
 
             protected abstract IEnumerable<string> _skipIDs { get; }
 
             public bool TryEnable(string charArg)
             {
-                return charArg == ArgChar;
+                return charArg == ArgString;
             }
 
             /// <param name="enabled">If this argument is enabled or not</param>
@@ -65,7 +65,7 @@ namespace StraySouls.Input
             "c6300_0003", //Slave Knight Gael (P2)
             };
 
-            protected override string ArgChar => "m";
+            protected override string ArgString => "m";
 
             protected override IEnumerable<string> _skipIDs => ID_MAIN_BOSS;
         }
@@ -94,7 +94,7 @@ namespace StraySouls.Input
             "c3060_0001" //Fire Demon
             };
 
-            protected override string ArgChar => "o";
+            protected override string ArgString => "o";
 
             protected override IEnumerable<string> _skipIDs => ID_OPTIONAL_BOSS;
         }
@@ -144,7 +144,7 @@ namespace StraySouls.Input
             "c2140_0005", //Basilisk 5
             };
 
-            protected override string ArgChar => "a";
+            protected override string ArgString => "a";
 
             protected override IEnumerable<string> _skipIDs => ID_AGGRESSIVE_NPC;
         }
@@ -209,7 +209,7 @@ namespace StraySouls.Input
             "c0000_0025", //Yuria of Londor
             };
 
-            protected override string ArgChar => "f";
+            protected override string ArgString => "f";
 
             protected override IEnumerable<string> _skipIDs => ID_FRIENDLY_NPC;
         }

@@ -18,6 +18,8 @@ namespace StraySouls.Input
         new EnemyRandomArgs.MultiplyEnemies()
         );
 
+        private static readonly System.Collections.Generic.Dictionary<string, int> ffff = new System.Collections.Generic.Dictionary<string, int>();
+
         protected override void Execute(Game game, string msbName)
         {
             Randomizer.Clear();
