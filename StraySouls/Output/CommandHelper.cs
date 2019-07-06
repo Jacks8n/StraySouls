@@ -2,7 +2,7 @@
 
 namespace StraySouls.Output
 {
-    public static class CommandOutput
+    public static class CommandHelper
     {
         public static void InputHelp()
         {

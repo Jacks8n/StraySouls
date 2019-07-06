@@ -2,15 +2,15 @@
 {
     public abstract class CommandBase<T> : ICommand where T : CommandBase<T>
     {
-        protected virtual CommandArgCollection<T> Arguments { get => null; }
+        protected virtual CommandArgCollection<T> AvailableArguments { get => null; }
 
-        public void Command(Game game, string filePath, string[] args)
+        public void Command(string filePath, string[] args)
         {
-            if (Arguments != null)
-                Arguments.AppendArgsTo(this as T, args);
-            Execute(game, filePath);
+            if (AvailableArguments != null)
+                AvailableArguments.ApplyArguments(this as T, args);
+            Execute(filePath);
         }
 
-        protected abstract void Execute(Game game, string filePath);
+        protected abstract void Execute(string filePath);
     }
 }

@@ -65,19 +65,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayExtension.cs" />
+    <Compile Include="IGameSpecific.cs" />
     <Compile Include="Input\Arguments\CommandArgCollection.cs" />
     <Compile Include="Input\Arguments\EnemyRandomArgs.cs" />
     <Compile Include="Input\Commands\BackupCommand.cs" />
     <Compile Include="Input\CommandInput.cs" />
     <Compile Include="GamePath.cs" />
     <Compile Include="Input\Commands\CommandBase.cs" />
+    <Compile Include="Input\Commands\DarkSoulsSpecific.cs" />
     <Compile Include="Input\Commands\EnemyRandomCommand.cs" />
-    <Compile Include="Output\CommandOutput.cs" />
+    <Compile Include="Output\CommandHelper.cs" />
     <Compile Include="Randomizer\EnemyRandomizer.cs" />
     <Compile Include="Input\Commands\RestoreCommand.cs" />
     <Compile Include="Input\Commands\ICommand.cs" />
     <Compile Include="Randomizer\IMapRandomizer.cs" />
-    <Compile Include="Input\Arguments\ICommandArg.cs" />
+    <Compile Include="Input\Arguments\ICommandArgument.cs" />
     <Compile Include="Randomizer\IRandomProperties.cs" />
     <Compile Include="Randomizer\MapRandomizerBase.cs" />
     <Compile Include="Program.cs" />

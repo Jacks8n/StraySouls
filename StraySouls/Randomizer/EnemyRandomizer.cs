@@ -6,6 +6,10 @@ namespace StraySouls
 {
     public class EnemyRandomizer : MapRandomizerBase<EnemyWrapper, EnemyRandomProperties>
     {
+        public List<string> SkipIDs { get; } = new List<string>();
+
+        public List<string> IDsToDuplicateAndRandomize { get; } = new List<string>();
+
         private static readonly string[] ID_MUST_SKIP_DS3 = new string[]
         {
             "c0100_0000","c0100_0001","c0100_0002","c0100_0003","c0100_0004",
@@ -26,21 +30,17 @@ namespace StraySouls
 
         private const string POSTFIX_CLONE = "_CL";
 
-        private readonly List<string> _skipIDs = new List<string>();
-
-        private readonly List<string> _additionIDs = new List<string>();
-
-        private readonly List<EnemyRandomProperties> _additionEnemies = new List<EnemyRandomProperties>();
+        private readonly List<EnemyRandomProperties> _propertiesToRandomize = new List<EnemyRandomProperties>();
 
         public EnemyRandomizer()
         {
             switch (TargetGame.Game)
             {
                 case Game.DS3:
-                    _skipIDs.AddRange(ID_MUST_SKIP_DS3);
+                    SkipIDs.AddRange(ID_MUST_SKIP_DS3);
                     break;
                 case Game.Sekiro:
-                    _skipIDs.AddRange(ID_MUST_SKIP_SEKIRO);
+                    SkipIDs.AddRange(ID_MUST_SKIP_SEKIRO);
                     break;
             }
         }
@@ -48,47 +48,31 @@ namespace StraySouls
         public override void Clear()
         {
             base.Clear();
-            _skipIDs.Clear();
-            _additionIDs.Clear();
-            _additionEnemies.Clear();
-        }
-
-        public void AddSkipIDs(IEnumerable<string> IDs, bool asAddition)
-        {
-            _skipIDs.AddRange(IDs);
-            if (asAddition)
-                AddAdditionIDs(IDs);
-        }
-
-        public void AddAdditionIDs(IEnumerable<string> IDs)
-        {
-            _additionIDs.AddRange(IDs);
+            SkipIDs.Clear();
+            IDsToDuplicateAndRandomize.Clear();
+            _propertiesToRandomize.Clear();
         }
 
         protected override void ModifyBeforeRandomize(List<EnemyWrapper> entries)
         {
-            _additionEnemies.Clear();
-
-            foreach (var item in entries)
-            {
-                string name = item.Name;
-                if (_additionIDs.Contains(name))
-                    _additionEnemies.Add(new EnemyRandomProperties(item));
-            }
+            _propertiesToRandomize.Clear();
+            _propertiesToRandomize.AddRange(entries
+                .Where((enemy) => IDsToDuplicateAndRandomize.Contains(enemy.Name))
+                .Select((enemy) => new EnemyRandomProperties(enemy)));
         }
 
         protected override bool CanBeRandomized(EnemyWrapper item)
         {
             string name = item.Name;
-            return !(ID_MUST_SKIP_DS3.Contains(name) || _skipIDs.FindIndex(str => name.StartsWith(str)) > -1);
+            return !(ID_MUST_SKIP_DS3.Contains(name) || SkipIDs.FindIndex(str => name.StartsWith(str)) > -1);
         }
 
-        protected override void ModifyAfterRandomize(List<EnemyWrapper> entries)
+        protected override void ModifyAfterApplyRandomization(List<EnemyWrapper> entries)
         {
-            for (int i = 0; i < RandomizedEntries.Length && i < _additionEnemies.Count; i++)
+            for (int i = 0; i < RandomizedEntries.Length && i < _propertiesToRandomize.Count; i++)
             {
-                var clone = new EnemyWrapper(RandomizedEntries[i]);
-                _additionEnemies[i].ApplyToEntry(clone);
+                EnemyWrapper clone = new EnemyWrapper(RandomizedEntries[i]);
+                _propertiesToRandomize[i].ApplyToEntry(clone);
                 clone.Name += POSTFIX_CLONE;
                 entries.Add(clone);
             }

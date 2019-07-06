@@ -12,7 +12,7 @@ namespace StraySouls
             Console.WriteLine($"Version: {Assembly.GetExecutingAssembly().GetName().Version}");
             Console.WriteLine("Map data folder found: {0}", GamePath.GetMapStudioPath());
             Console.WriteLine();
-            CommandOutput.InputHelp();
+            CommandHelper.InputHelp();
 
             string command;
 

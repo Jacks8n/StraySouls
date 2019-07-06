@@ -4,13 +4,13 @@ using StraySouls.Wrapper;
 
 namespace StraySouls.Input
 {
-    public class EnemyRandomCommand : CommandBase<EnemyRandomCommand>
+    public class EnemyRandomCommand : CommandBase<EnemyRandomCommand>, IDarkSoulsSpecific<EnemyRandomCommand>
     {
         public readonly EnemyRandomizer Randomizer = new EnemyRandomizer();
 
-        protected override CommandArgCollection<EnemyRandomCommand> Arguments => ARGUMENTS_AVAILABLE;
+        protected override CommandArgCollection<EnemyRandomCommand> AvailableArguments => AVAILABLE_ARGUMENTS;
 
-        private static readonly CommandArgCollection<EnemyRandomCommand> ARGUMENTS_AVAILABLE = new CommandArgCollection<EnemyRandomCommand>(
+        private static readonly CommandArgCollection<EnemyRandomCommand> AVAILABLE_ARGUMENTS = new CommandArgCollection<EnemyRandomCommand>(
         new EnemyRandomArgs.RandomMainBoss(),
         new EnemyRandomArgs.RandomOptionalBoss(),
         new EnemyRandomArgs.RandomAggressiveNPC(),
@@ -18,26 +18,19 @@ namespace StraySouls.Input
         new EnemyRandomArgs.MultiplyEnemies()
         );
 
-        private static readonly System.Collections.Generic.Dictionary<string, int> ffff = new System.Collections.Generic.Dictionary<string, int>();
-
-        protected override void Execute(Game game, string msbName)
+        protected override void Execute(string msbName)
         {
             Randomizer.Clear();
 
             string filePath = GamePath.GetMapStudioPath() + msbName;
-            switch (game)
-            {
-                case Game.DS3:
-                    MSB3 msb3 = MSB3.Read(filePath);
-                    EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msb3.Parts.Enemies).ToList()), msb3.Parts.Enemies);
-                    msb3.Write(filePath);
-                    break;
-                case Game.Sekiro:
-                    MSBS msbs = MSBS.Read(filePath);
-                    EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msbs.Parts.Enemies).ToList()), msbs.Parts.Enemies);
-                    msbs.Write(filePath);
-                    break;
-            }
+            MSB3 msb3 = MSB3.Read(filePath);
+            EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msb3.Parts.Enemies).ToList()), msb3.Parts.Enemies);
+            msb3.Write(filePath);
+        }
+
+        EnemyRandomCommand IGameSpecific<EnemyRandomCommand>.GetSpecified()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

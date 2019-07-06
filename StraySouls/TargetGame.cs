@@ -2,16 +2,16 @@
 
 namespace StraySouls
 {
-    public enum Game { _, DS3, Sekiro }
+    public enum Game { Unknown, DS3, Sekiro }
 
     public static class TargetGame
     {
-        public static Game Game { get => _game == Game._ ? AskUserTargetGame() : _game; }
+        public static Game Game { get => _game == Game.Unknown ? AskUserTargetGame() : _game; }
 
         private const string FOLDER_PATH_DS3 = @"DARK SOULS III\Game\";
         private const string FOLDER_PATH_SEKIRO = @"Sekiro\";
 
-        private static Game _game = Game._;
+        private static Game _game = Game.Unknown;
 
         public static Game AskUserTargetGame()
         {

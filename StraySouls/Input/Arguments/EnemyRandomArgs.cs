@@ -6,25 +6,20 @@ namespace StraySouls.Input
 {
     public static class EnemyRandomArgs
     {
-        public abstract class RandomListBase : ICommandArg<EnemyRandomCommand>
+        public abstract class SkipListModifierBase : ICommandArgument<EnemyRandomCommand>
         {
-            protected abstract string ArgString { get; }
+            protected abstract IEnumerable<string> IDsToSkip { get; }
 
-            protected abstract IEnumerable<string> _skipIDs { get; }
-
-            public bool TryEnable(string charArg)
-            {
-                return charArg == ArgString;
-            }
+            public abstract bool IsValidArgString(string argString);
 
             /// <param name="enabled">If this argument is enabled or not</param>
-            public void GetCommandArg(EnemyRandomCommand command, bool enabled)
+            public void ModifyCommand(EnemyRandomCommand command, bool enabled)
             {
-                command.Randomizer.AddSkipIDs(_skipIDs, enabled);
+                command.Randomizer.AddSkipIDs(IDsToSkip, enabled);
             }
         }
 
-        public class RandomMainBoss : RandomListBase
+        public class RandomMainBoss : SkipListModifierBase
         {
             private static readonly string[] ID_MAIN_BOSS = new string[]
             {
@@ -65,12 +60,15 @@ namespace StraySouls.Input
             "c6300_0003", //Slave Knight Gael (P2)
             };
 
-            protected override string ArgString => "m";
+            public override bool IsValidArgString(string argString)
+            {
+                return argString.Length == 1 && (argString[0] == 'm' || argString[0] == 'M');
+            }
 
-            protected override IEnumerable<string> _skipIDs => ID_MAIN_BOSS;
+            protected override IEnumerable<string> IDsToSkip => ID_MAIN_BOSS;
         }
 
-        public class RandomOptionalBoss : RandomListBase
+        public class RandomOptionalBoss : SkipListModifierBase
         {
             private static readonly string[] ID_OPTIONAL_BOSS = new string[]
             {
@@ -94,12 +92,15 @@ namespace StraySouls.Input
             "c3060_0001" //Fire Demon
             };
 
-            protected override string ArgString => "o";
+            public override bool IsValidArgString(string argString)
+            {
+                return argString.Length == 1 && (argString[0] == 'o' || argString[0] == 'O');
+            }
 
-            protected override IEnumerable<string> _skipIDs => ID_OPTIONAL_BOSS;
+            protected override IEnumerable<string> IDsToSkip => ID_OPTIONAL_BOSS;
         }
 
-        public class RandomAggressiveNPC : RandomListBase
+        public class RandomAggressiveNPC : SkipListModifierBase
         {
             private static readonly string[] ID_AGGRESSIVE_NPC = new string[]
             {
@@ -143,13 +144,16 @@ namespace StraySouls.Input
             "c2140_0004", //Basilisk 4
             "c2140_0005", //Basilisk 5
             };
+            
+            public override bool IsValidArgString(string argString)
+            {
+                return argString.Length == 1 && (argString[0] == 'a' || argString[0] == 'A');
+            }
 
-            protected override string ArgString => "a";
-
-            protected override IEnumerable<string> _skipIDs => ID_AGGRESSIVE_NPC;
+            protected override IEnumerable<string> IDsToSkip => ID_AGGRESSIVE_NPC;
         }
 
-        public class RandomFriendlyNPC : RandomListBase
+        public class RandomFriendlyNPC : SkipListModifierBase
         {
             private static readonly string[] ID_FRIENDLY_NPC = new string[]
             {
@@ -209,25 +213,28 @@ namespace StraySouls.Input
             "c0000_0025", //Yuria of Londor
             };
 
-            protected override string ArgString => "f";
+            public override bool IsValidArgString(string argString)
+            {
+                return argString.Length == 1 && (argString[0] == 'f' || argString[0] == 'F');
+            }
 
-            protected override IEnumerable<string> _skipIDs => ID_FRIENDLY_NPC;
+            protected override IEnumerable<string> IDsToSkip => ID_FRIENDLY_NPC;
         }
 
-        public class MultiplyEnemies : ICommandArg<EnemyRandomCommand>
+        public class MultiplyEnemies : ICommandArgument<EnemyRandomCommand>
         {
             public const int MULTIPLY_MINIMUM = 2;
             public const int MULTIPLY_MAXIMUM = 9;
 
             private int _multiplyTimes = MULTIPLY_MINIMUM;
 
-            public bool TryEnable(string argChar)
+            public bool IsValidArgString(string argString)
             {
-                return int.TryParse(argChar, out _multiplyTimes)
+                return int.TryParse(argString, out _multiplyTimes)
                     && _multiplyTimes >= MULTIPLY_MINIMUM && _multiplyTimes <= MULTIPLY_MAXIMUM;
             }
 
-            public void GetCommandArg(EnemyRandomCommand command, bool enabled)
+            public void ModifyCommand(EnemyRandomCommand command, bool enabled)
             {
                 if (!enabled)
                     return;
@@ -249,13 +256,16 @@ namespace StraySouls.Input
             }
         }
 
-        public class UnlimitedMode : ICommandArg<EnemyRandomCommand>
+        public class UnlimitedMode : ICommandArgument<EnemyRandomCommand>
         {
-            public bool TryEnable(string argChar) => argChar == "u";
-
-            public void GetCommandArg(EnemyRandomCommand command, bool enabled)
+            public bool IsValidArgString(string argString)
             {
-                command.Randomizer.BeforeApply += IndividualRandom;
+                return argString.Length == 1 && (argString[0] == 'u' || argString[0] == 'U');
+            }
+
+            public void ModifyCommand(EnemyRandomCommand command, bool enabled)
+            {
+                command.Randomizer.BeforeApplyRandomization += IndividualRandom;
             }
 
             private void IndividualRandom(EnemyWrapper[] availableEntries, EnemyRandomProperties[] matchingProperties, List<EnemyWrapper> msbEnemies)

@@ -4,21 +4,19 @@ namespace StraySouls.Input
 {
     public class CommandArgCollection<TCommand> where TCommand : class, ICommand
     {
-        private readonly ICommandArg<TCommand>[] _commandArgs;
+        private readonly ICommandArgument<TCommand>[] _commandArgs;
 
-        public CommandArgCollection(params ICommandArg<TCommand>[] args)
+        public CommandArgCollection(params ICommandArgument<TCommand>[] args)
         {
-            _commandArgs = new ICommandArg<TCommand>[args.Length];
-            args.CopyTo(_commandArgs, index: 0);
+            _commandArgs = args;
         }
 
-        public void AppendArgsTo(TCommand command, string[] charArgs)
+        public void ApplyArguments(TCommand command, string[] args)
         {
             for (int i = 0; i < _commandArgs.Length; i++)
             {
-                ICommandArg<TCommand> arg = _commandArgs[i];
-                arg.GetCommandArg(command,
-                    enabled: charArgs.Any(c => arg.TryEnable(c)));
+                ICommandArgument<TCommand> arg = _commandArgs[i];
+                arg.ModifyCommand(command, enabled: args.Any(c => arg.IsValidArgString(c)));
             }
         }
     }

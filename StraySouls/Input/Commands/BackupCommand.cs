@@ -4,7 +4,7 @@ namespace StraySouls.Input
 {
     public class BackupCommand : CommandBase<BackupCommand>
     {
-        protected override void Execute(Game game, string msbName)
+        protected override void Execute(string msbName)
         {
             string _backupFolderPath = GamePath.GetBackupPath();
             Directory.CreateDirectory(_backupFolderPath);

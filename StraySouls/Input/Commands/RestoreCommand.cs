@@ -5,7 +5,7 @@ namespace StraySouls.Input
 {
     public class RestoreCommand : CommandBase<RestoreCommand>
     {
-        protected override  void Execute(Game game, string msbName)
+        protected override  void Execute(string msbName)
         {
             string source = GamePath.GetMapStudioPath() + msbName;
 
