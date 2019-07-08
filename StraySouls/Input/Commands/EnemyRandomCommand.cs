@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using SoulsFormats;
-using StraySouls.Wrapper;
+﻿using SoulsFormats;
+using StraySouls.Randomizer;
 
 namespace StraySouls.Input
 {
-    public class EnemyRandomCommand : CommandBase<EnemyRandomCommand>, IDarkSoulsSpecific<EnemyRandomCommand>
+    public class EnemyRandomCommand : CommandBase<EnemyRandomCommand>
     {
-        public readonly EnemyRandomizer Randomizer = new EnemyRandomizer();
+        public readonly EnemyRandomizer_DS3 Randomizer = new EnemyRandomizer_DS3();
 
         protected override CommandArgCollection<EnemyRandomCommand> AvailableArguments => AVAILABLE_ARGUMENTS;
 
@@ -24,13 +23,8 @@ namespace StraySouls.Input
 
             string filePath = GamePath.GetMapStudioPath() + msbName;
             MSB3 msb3 = MSB3.Read(filePath);
-            EnemyWrapper.Overwrite(Randomizer.Randomize(EnemyWrapper.Read(msb3.Parts.Enemies).ToList()), msb3.Parts.Enemies);
+            Randomizer.Randomize(msb3.Parts.Enemies);
             msb3.Write(filePath);
-        }
-
-        EnemyRandomCommand IGameSpecific<EnemyRandomCommand>.GetSpecified()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

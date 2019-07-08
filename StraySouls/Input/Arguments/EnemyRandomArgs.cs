@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using StraySouls.Wrapper;
 
+using Enemy = SoulsFormats.MSB3.Part.Enemy;
+
 namespace StraySouls.Input
 {
     public static class EnemyRandomArgs
@@ -144,7 +146,7 @@ namespace StraySouls.Input
             "c2140_0004", //Basilisk 4
             "c2140_0005", //Basilisk 5
             };
-            
+
             public override bool IsValidArgString(string argString)
             {
                 return argString.Length == 1 && (argString[0] == 'a' || argString[0] == 'A');
@@ -226,12 +228,12 @@ namespace StraySouls.Input
             public const int MULTIPLY_MINIMUM = 2;
             public const int MULTIPLY_MAXIMUM = 9;
 
-            private int _multiplyTimes = MULTIPLY_MINIMUM;
+            private int _multiplier = MULTIPLY_MINIMUM;
 
             public bool IsValidArgString(string argString)
             {
-                return int.TryParse(argString, out _multiplyTimes)
-                    && _multiplyTimes >= MULTIPLY_MINIMUM && _multiplyTimes <= MULTIPLY_MAXIMUM;
+                return int.TryParse(argString, out _multiplier)
+                    && _multiplier >= MULTIPLY_MINIMUM && _multiplier <= MULTIPLY_MAXIMUM;
             }
 
             public void ModifyCommand(EnemyRandomCommand command, bool enabled)
@@ -239,43 +241,19 @@ namespace StraySouls.Input
                 if (!enabled)
                     return;
 
-                command.Randomizer.OnRandomizeEnd += Multiply;
+                command.Randomizer.OnAfterSelectRandomizableBeforeRandomize += Multiply;
             }
 
-            private void Multiply(EnemyWrapper[] availableEnemies, EnemyRandomProperties[] matchingProperties, List<EnemyWrapper> msbEntries)
+            private void Multiply(List<Enemy> originalEntries, List<Enemy> randomizableEntries, List<EnemyWrapper_DS3> associatedWrappers)
             {
-                Random random = new Random();
-                for (int i = _multiplyTimes; i > 1; i--)
-                    for (int j = 0; j < availableEnemies.Length; j++)
+                for (int j = randomizableEntries.Count - 1; j > -1; j--)
+                    for (int i = 1; i < _multiplier; i++)
                     {
-                        EnemyWrapper origin = availableEnemies[j];
-                        EnemyWrapper clone = new EnemyWrapper(origin) { Name = $"{origin.Name}_c{i}", EventEntityID = -1 };
-                        matchingProperties[random.Next(0, availableEnemies.Length)].ApplyToEntry(clone);
-                        msbEntries.Add(clone);
+                        Enemy enemy = randomizableEntries[i].Clone();
+                        originalEntries.Add(enemy);
+                        randomizableEntries.Add(enemy);
+                        associatedWrappers.Add(SoulsFormatEntryWrapperHelper.CloneWrapper<EnemyWrapper_DS3, Enemy>(associatedWrappers[j]));
                     }
-            }
-        }
-
-        public class UnlimitedMode : ICommandArgument<EnemyRandomCommand>
-        {
-            public bool IsValidArgString(string argString)
-            {
-                return argString.Length == 1 && (argString[0] == 'u' || argString[0] == 'U');
-            }
-
-            public void ModifyCommand(EnemyRandomCommand command, bool enabled)
-            {
-                command.Randomizer.BeforeApplyRandomization += IndividualRandom;
-            }
-
-            private void IndividualRandom(EnemyWrapper[] availableEntries, EnemyRandomProperties[] matchingProperties, List<EnemyWrapper> msbEnemies)
-            {
-                EnemyWrapper[] temp = new EnemyWrapper[matchingProperties.Length];
-                matchingProperties.CopyTo(temp, 0);
-                Random random = new Random();
-
-                for (int i = 0; i < temp.Length; i++)
-                    availableEntries[i] = temp[random.Next(0, temp.Length)];
             }
         }
     }
