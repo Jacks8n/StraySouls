@@ -35,11 +35,11 @@ namespace StraySouls.Wrapper
             throw new Exception("rua");
         }
 
-        public static TWrapper CloneWrapper<TWrapper, TEntry>(this TWrapper wrapper) where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>, new()
+        public static TWrapper GetWrapper<TWrapper, TEntry>(this TEntry entry) where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>, new()
         {
-            TWrapper clone = new TWrapper();
-            clone.AssignWrapper(wrapper);
-            return clone;
+            TWrapper wrapper = new TWrapper();
+            wrapper.AssignEntry(entry);
+            return wrapper;
         }
     }
 }

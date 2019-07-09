@@ -16,41 +16,28 @@ namespace StraySouls.Wrapper
 
         public int EventEntityID { get; private set; }
 
-        public int EventFlagID { get; private set; }
-
         public string WalkRouteName { get; private set; }
-
-        public string EntryName { get => _enemy.Name; set => _enemy.Name = value; }
-
-        private Enemy _enemy;
 
         public void AssignEntry(Enemy entry)
         {
-            _enemy = entry;
+            ModelName = entry.ModelName;
             TalkID = entry.TalkID;
             NPCParamID = entry.NPCParamID;
             CharaInitID = entry.CharaInitID;
             ThinkParamID = entry.ThinkParamID;
             EventEntityID = entry.EventEntityID;
-            EventFlagID = entry.EventEntityID;
             WalkRouteName = entry.WalkRouteName;
-        }
-
-        public void AssignWrapper(EnemyWrapper_DS3 wrapper)
-        {
-            AssignEntry(wrapper._enemy);
-            _enemy = null;
         }
 
         public void ReadToEntry(Enemy result)
         {
-            TalkID = result.TalkID;
-            NPCParamID = result.NPCParamID;
-            CharaInitID = result.CharaInitID;
-            ThinkParamID = result.ThinkParamID;
-            EventEntityID = result.EventEntityID;
-            EventFlagID = result.EventEntityID;
-            WalkRouteName = result.WalkRouteName;
+            result.ModelName = ModelName;
+            result.TalkID = TalkID;
+            result.NPCParamID = NPCParamID;
+            result.CharaInitID = CharaInitID;
+            result.ThinkParamID = ThinkParamID;
+            result.EventEntityID = EventEntityID;
+            result.WalkRouteName = WalkRouteName;
         }
     }
 }

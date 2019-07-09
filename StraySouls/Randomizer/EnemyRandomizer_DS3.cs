@@ -21,7 +21,7 @@ namespace StraySouls.Randomizer
             "c5022_0002","c5022_0003","c5250_0000",
         };
 
-        public EnemyRandomizer_DS3()
+        protected override void BeforeEverything()
         {
             SkipIDs.AddRange(ID_MUST_SKIP_DS3);
         }

@@ -28,8 +28,9 @@ namespace StraySouls
             else
                 Console.WriteLine("Can't find the mapstudio folder automatically");
 
-            while (!_mapstudioPath.EndsWith(FOLDER_PATH_MAPSTUDIO) || !Directory.Exists(_mapstudioPath))
+            while (!Directory.Exists(_mapstudioPath))
             {
+                Console.WriteLine("Can't find " + _mapstudioPath);
                 Console.WriteLine($"It looks like ..\\DARK SOULS III\\Game\\map\\mapstudio\\");
                 Console.Write("Type the full path manually:");
 

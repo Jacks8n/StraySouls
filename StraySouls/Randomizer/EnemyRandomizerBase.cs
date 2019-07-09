@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SoulsFormats;
+using System.Linq;
 using System.Collections.Generic;
 using StraySouls.Wrapper;
 
@@ -10,7 +11,7 @@ namespace StraySouls
 
         public List<string> IDsToDuplicateAndRandomize { get; } = new List<string>();
 
-        private const string POSTFIX_CLONE = "_CL";
+        public EnemyRandomizerBase() { }
 
         public override void Clear()
         {
@@ -21,14 +22,15 @@ namespace StraySouls
 
         protected override void AfterSelectRandomizableBeforeRandomize()
         {
-            string name;
-            for (int i = AssociatedWrappers.Count - 1; i > -1; i--)
+            for (int i = OriginalEntries.Count - 1; i > -1; i--)
             {
-                TWrapper wrapper = AssociatedWrappers[i];
-                if (IDsToDuplicateAndRandomize.Contains(name = wrapper.GetName()))
+                TEntry entry = OriginalEntries[i];
+                if (IDsToDuplicateAndRandomize.Any((id) => entry.GetName().StartsWith(id)))
                 {
-                    AssociatedWrappers.Add(wrapper.CloneWrapper<TWrapper, TEntry>());
-                    RandomizableEntries.Add(RandomizableEntries[i].Clone());
+                    TEntry clone = entry.Clone();
+                    OriginalEntries.Add(clone);
+                    RandomizableEntries.Add(clone);
+                    AssociatedWrappers.Add(clone.GetWrapper<TWrapper, TEntry>());
                 }
             }
         }

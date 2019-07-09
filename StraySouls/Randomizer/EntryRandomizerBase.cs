@@ -32,13 +32,9 @@ namespace StraySouls
             BeforeEverything();
 
             RandomizableEntries.AddRange(entries.Where(IsRandomizable));
-            AssociatedWrappers.AddRange(RandomizableEntries.Select((entry) =>
-            {
-                TWrapper wrapper = new TWrapper();
-                wrapper.AssignEntry(entry);
-                return wrapper;
-            }));
+            AssociatedWrappers.AddRange(RandomizableEntries.Select((entry) => entry.GetWrapper<TWrapper, TEntry>()));
 
+            OnAfterSelectRandomizableBeforeRandomize?.Invoke(OriginalEntries, RandomizableEntries, AssociatedWrappers);
             AfterSelectRandomizableBeforeRandomize();
             if (RandomizableEntries.Count != AssociatedWrappers.Count)
                 throw new Exception("Ensure that RandomizableEntries and AssociatedWrappers always have equal counts");
@@ -53,6 +49,7 @@ namespace StraySouls
             OriginalEntries = null;
             RandomizableEntries.Clear();
             AssociatedWrappers.Clear();
+            OnAfterSelectRandomizableBeforeRandomize = null;
         }
 
         protected virtual void BeforeEverything() { }

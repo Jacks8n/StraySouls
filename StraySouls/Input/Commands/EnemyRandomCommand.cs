@@ -19,11 +19,10 @@ namespace StraySouls.Input
 
         protected override void Execute(string msbName)
         {
-            Randomizer.Clear();
-
             string filePath = GamePath.GetMapStudioPath() + msbName;
             MSB3 msb3 = MSB3.Read(filePath);
             Randomizer.Randomize(msb3.Parts.Enemies);
+            Randomizer.Clear();
             msb3.Write(filePath);
         }
     }

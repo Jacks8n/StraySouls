@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using StraySouls.Wrapper;
 
 using Enemy = SoulsFormats.MSB3.Part.Enemy;
@@ -10,14 +9,16 @@ namespace StraySouls.Input
     {
         public abstract class SkipListModifierBase : ICommandArgument<EnemyRandomCommand>
         {
-            protected abstract IEnumerable<string> IDsToSkip { get; }
+            protected abstract IEnumerable<string> IDsToSkipOrDuplicateRandomize { get; }
 
             public abstract bool IsValidArgString(string argString);
 
             /// <param name="enabled">If this argument is enabled or not</param>
             public void ModifyCommand(EnemyRandomCommand command, bool enabled)
             {
-                command.Randomizer.AddSkipIDs(IDsToSkip, enabled);
+                command.Randomizer.SkipIDs.AddRange(IDsToSkipOrDuplicateRandomize);
+                if (enabled)
+                    command.Randomizer.IDsToDuplicateAndRandomize.AddRange(IDsToSkipOrDuplicateRandomize);
             }
         }
 
@@ -67,7 +68,7 @@ namespace StraySouls.Input
                 return argString.Length == 1 && (argString[0] == 'm' || argString[0] == 'M');
             }
 
-            protected override IEnumerable<string> IDsToSkip => ID_MAIN_BOSS;
+            protected override IEnumerable<string> IDsToSkipOrDuplicateRandomize => ID_MAIN_BOSS;
         }
 
         public class RandomOptionalBoss : SkipListModifierBase
@@ -99,7 +100,7 @@ namespace StraySouls.Input
                 return argString.Length == 1 && (argString[0] == 'o' || argString[0] == 'O');
             }
 
-            protected override IEnumerable<string> IDsToSkip => ID_OPTIONAL_BOSS;
+            protected override IEnumerable<string> IDsToSkipOrDuplicateRandomize => ID_OPTIONAL_BOSS;
         }
 
         public class RandomAggressiveNPC : SkipListModifierBase
@@ -152,7 +153,7 @@ namespace StraySouls.Input
                 return argString.Length == 1 && (argString[0] == 'a' || argString[0] == 'A');
             }
 
-            protected override IEnumerable<string> IDsToSkip => ID_AGGRESSIVE_NPC;
+            protected override IEnumerable<string> IDsToSkipOrDuplicateRandomize => ID_AGGRESSIVE_NPC;
         }
 
         public class RandomFriendlyNPC : SkipListModifierBase
@@ -220,7 +221,7 @@ namespace StraySouls.Input
                 return argString.Length == 1 && (argString[0] == 'f' || argString[0] == 'F');
             }
 
-            protected override IEnumerable<string> IDsToSkip => ID_FRIENDLY_NPC;
+            protected override IEnumerable<string> IDsToSkipOrDuplicateRandomize => ID_FRIENDLY_NPC;
         }
 
         public class MultiplyEnemies : ICommandArgument<EnemyRandomCommand>
@@ -246,13 +247,13 @@ namespace StraySouls.Input
 
             private void Multiply(List<Enemy> originalEntries, List<Enemy> randomizableEntries, List<EnemyWrapper_DS3> associatedWrappers)
             {
-                for (int j = randomizableEntries.Count - 1; j > -1; j--)
-                    for (int i = 1; i < _multiplier; i++)
+                for (int i = randomizableEntries.Count - 1; i > -1; i--)
+                    for (int j = 1; j < _multiplier; j++)
                     {
-                        Enemy enemy = randomizableEntries[i].Clone();
-                        originalEntries.Add(enemy);
-                        randomizableEntries.Add(enemy);
-                        associatedWrappers.Add(SoulsFormatEntryWrapperHelper.CloneWrapper<EnemyWrapper_DS3, Enemy>(associatedWrappers[j]));
+                        Enemy clone = randomizableEntries[i].Clone();
+                        originalEntries.Add(clone);
+                        randomizableEntries.Add(clone);
+                        associatedWrappers.Add(clone.GetWrapper<EnemyWrapper_DS3, Enemy>());
                     }
             }
         }
