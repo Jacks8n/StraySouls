@@ -1,9 +1,8 @@
-﻿using SoulsFormats;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
 using StraySouls.Wrapper;
 
-namespace StraySouls
+namespace StraySouls.Randomizer
 {
     public abstract class EnemyRandomizerBase<TEntry, TWrapper> : EntryRandomizerBase<TEntry, TWrapper> where TEntry : class where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>, new()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StraySouls.Wrapper;
 
-namespace StraySouls
+namespace StraySouls.Randomizer
 {
     public abstract class EntryRandomizerBase<TEntry, TWrapper> : IEntryRandomizer<TEntry, TWrapper> where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>, new()
     {

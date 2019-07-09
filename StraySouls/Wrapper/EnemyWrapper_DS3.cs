@@ -4,19 +4,19 @@ namespace StraySouls.Wrapper
 {
     public class EnemyWrapper_DS3 : ISoulsFormatsEntryWrapper<EnemyWrapper_DS3, Enemy>
     {
-        public string ModelName { get; private set; }
+        public string ModelName;
 
-        public int TalkID { get; private set; }
+        public int TalkID;
 
-        public int NPCParamID { get; private set; }
+        public int NPCParamID;
 
-        public int CharaInitID { get; private set; }
+        public int CharaInitID;
 
-        public int ThinkParamID { get; private set; }
+        public int ThinkParamID;
 
-        public int EventEntityID { get; private set; }
+        public int EventEntityID;
 
-        public string WalkRouteName { get; private set; }
+        public string WalkRouteName;
 
         public void AssignEntry(Enemy entry)
         {

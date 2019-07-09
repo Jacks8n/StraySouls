@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StraySouls.Wrapper;
 
-namespace StraySouls
+namespace StraySouls.Randomizer
 {
     public interface IEntryRandomizer<TEntry, TWrapper> where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>
     {

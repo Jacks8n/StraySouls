@@ -66,17 +66,23 @@
   <ItemGroup>
     <Compile Include="ArrayExtension.cs" />
     <Compile Include="Input\Arguments\CommandArgCollection.cs" />
-    <Compile Include="Input\Arguments\EnemyRandomArgs.cs" />
+    <Compile Include="Input\Arguments\EnemyRandomArgs_DS3.cs" />
+    <Compile Include="Input\Arguments\EnemyRandomArgs_Sekiro.cs" />
+    <Compile Include="Input\Arguments\MultiplyEnemies.cs" />
+    <Compile Include="Input\Arguments\SkipListModifierBase.cs" />
     <Compile Include="Input\Commands\BackupCommand.cs" />
     <Compile Include="Input\CommandInput.cs" />
     <Compile Include="GamePath.cs" />
     <Compile Include="Input\Commands\CommandBase.cs" />
     <Compile Include="Input\Commands\DarkSoulsSpecific.cs" />
-    <Compile Include="Input\Commands\EnemyRandomCommand.cs" />
+    <Compile Include="Input\Commands\EnemyRandomCommand_DS3.cs" />
+    <Compile Include="Input\Commands\EnemyRandomCommand_Sekiro.cs" />
+    <Compile Include="Input\CommandTables.cs" />
     <Compile Include="Output\CommandHelper.cs" />
     <Compile Include="Randomizer\EnemyRandomizerBase.cs" />
     <Compile Include="Input\Commands\RestoreCommand.cs" />
     <Compile Include="Input\Commands\ICommand.cs" />
+    <Compile Include="Randomizer\EnemyRandomizer_Sekiro.cs" />
     <Compile Include="Randomizer\EnemyRandomizer_DS3.cs" />
     <Compile Include="Randomizer\IEntryRandomizer.cs" />
     <Compile Include="Input\Arguments\ICommandArgument.cs" />
@@ -84,6 +90,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TargetGame.cs" />
+    <Compile Include="Wrapper\EnemyWrapper_Sekiro.cs" />
     <Compile Include="Wrapper\EnemyWrapper_DS3.cs" />
     <Compile Include="Wrapper\SoulsFormatEntryWrapperHelper.cs" />
     <Compile Include="Wrapper\ISoulsFormatsEntryWrapper.cs" />

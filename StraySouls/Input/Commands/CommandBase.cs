@@ -1,16 +1,18 @@
-﻿namespace StraySouls.Input
+﻿using StraySouls.Input.Arguments;
+
+namespace StraySouls.Input
 {
     public abstract class CommandBase<T> : ICommand where T : CommandBase<T>
     {
         protected virtual CommandArgCollection<T> AvailableArguments { get => null; }
 
-        public void Command(string filePath, string[] args)
+        public void Command(string filePath, string fileName, string[] args)
         {
             if (AvailableArguments != null)
                 AvailableArguments.ApplyArguments(this as T, args);
-            Execute(filePath);
+            Execute(filePath, fileName);
         }
 
-        protected abstract void Execute(string filePath);
+        protected abstract void Execute(string filePath, string fileName);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace StraySouls.Input
+﻿namespace StraySouls.Input.Arguments
 {
     public interface ICommandArgument<in TCommand> where TCommand : class, ICommand
     {

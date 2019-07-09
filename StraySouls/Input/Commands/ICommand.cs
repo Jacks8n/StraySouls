@@ -2,6 +2,6 @@
 {
     public interface ICommand
     {
-        void Command(string filePath, string[] args);
+        void Command(string filePath, string fileName, string[] args);
     }
 }

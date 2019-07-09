@@ -5,14 +5,13 @@ namespace StraySouls.Input
 {
     public class RestoreCommand : CommandBase<RestoreCommand>
     {
-        protected override  void Execute(string msbName)
+        protected override  void Execute(string filePath,string fileName)
         {
-            string source = GamePath.GetMapStudioPath() + msbName;
-
-            if (File.Exists(source))
-                File.Copy(GamePath.GetBackupPath() + msbName, GamePath.GetMapStudioPath() + msbName, overwrite: true);
+            string backupPath = GamePath.GetBackupPath() + fileName;
+            if (File.Exists(backupPath))
+                File.Copy(backupPath, filePath, overwrite: true);
             else
-                Console.WriteLine($"{source} backup not found");
+                Console.WriteLine($"{backupPath} backup not found");
         }
     }
 }

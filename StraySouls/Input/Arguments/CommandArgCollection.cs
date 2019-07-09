@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace StraySouls.Input
+namespace StraySouls.Input.Arguments
 {
     public class CommandArgCollection<TCommand> where TCommand : class, ICommand
     {
