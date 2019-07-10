@@ -21,6 +21,8 @@ namespace StraySouls.Input.Arguments
     {
         protected abstract IEnumerable<string> IDsToSkipOrDuplicateRandomize { get; }
 
+        protected virtual int Multiplier => 1;
+
         public abstract bool IsValidArgString(string argString);
 
         /// <param name="enabled">If this argument is enabled or not</param>

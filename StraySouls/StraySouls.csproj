@@ -68,7 +68,8 @@
     <Compile Include="Input\Arguments\CommandArgCollection.cs" />
     <Compile Include="Input\Arguments\EnemyRandomArgs_DS3.cs" />
     <Compile Include="Input\Arguments\EnemyRandomArgs_Sekiro.cs" />
-    <Compile Include="Input\Arguments\MultiplyEnemies.cs" />
+    <Compile Include="Input\Arguments\MultiplyEnemyArg.cs" />
+    <Compile Include="Input\Arguments\RandomScaleArg.cs" />
     <Compile Include="Input\Arguments\SkipListModifierBase.cs" />
     <Compile Include="Input\Commands\BackupCommand.cs" />
     <Compile Include="Input\CommandInput.cs" />

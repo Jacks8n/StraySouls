@@ -6,7 +6,7 @@ using Enemy_Sekiro = SoulsFormats.MSBS.Part.Enemy;
 
 namespace StraySouls.Input.Arguments
 {
-    public class MultiplyEnemies : ICommandArgument<EnemyRandomCommand_DS3>, ICommandArgument<EnemyRandomCommand_Sekiro>
+    public class MultiplyEnemyArg : ICommandArgument<EnemyRandomCommand_DS3>, ICommandArgument<EnemyRandomCommand_Sekiro>
     {
         public const int MULTIPLY_MINIMUM = 2;
         public const int MULTIPLY_MAXIMUM = 9;

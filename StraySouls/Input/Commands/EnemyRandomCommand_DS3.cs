@@ -15,7 +15,8 @@ namespace StraySouls.Input
         new EnemyRandomArgs_DS3.RandomOptionalBoss(),
         new EnemyRandomArgs_DS3.RandomAggressiveNPC(),
         new EnemyRandomArgs_DS3.RandomFriendlyNPC(),
-        new MultiplyEnemies());
+        new MultiplyEnemyArg(),
+        new RandomScaleArg());
 
         protected override void Execute(string filePath, string fileName)
         {

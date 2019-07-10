@@ -13,6 +13,7 @@ namespace StraySouls.Output
             WriteLine("\t-m\t: Randomize \"incremental\" main boss");
             WriteLine("\t-f\t: Randomize friendly NPCs additionally (TODO)");
             WriteLine("\t-2 ~ -9\t: Multiply enemies by the number given, for example, -3 means multiplying enemies by three times");
+            WriteLine("\t-s\t: Randomize scale of all enemies, i.e. randomize their size");
             WriteLine("Just type random like:\nInput>>random\nOr use arguments like:\nInput>>random -m -o -2");
             switch (TargetGame.Game)
             {

@@ -23,6 +23,7 @@ namespace StraySouls.Input.Arguments
             "c5410",    //Isshin Ashina (???)
             "c5420",    //Isshin Ashina (???)
             "c5430",    //Isshin Ashina (Ending: Shura)
+            "c7020",    //Demon of Hatred
             "c7100",    //Genichiro Ashina
             "c7110",    //Genichiro Ashina (Lightning of Tomoe)
         };

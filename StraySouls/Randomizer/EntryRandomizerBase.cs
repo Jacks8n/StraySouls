@@ -7,9 +7,11 @@ namespace StraySouls.Randomizer
 {
     public abstract class EntryRandomizerBase<TEntry, TWrapper> : IEntryRandomizer<TEntry, TWrapper> where TWrapper : ISoulsFormatsEntryWrapper<TWrapper, TEntry>, new()
     {
-        public delegate void RandomizerAction(List<TEntry> originalEntries, List<TEntry> randomizableEntries, List<TWrapper> associatedWrappers);
+        public delegate void RandomizerAction<T0, T1, T2>(List<T0> originalEntries, List<T1> randomizableEntries, List<T2> associatedWrappers);
 
-        public event RandomizerAction OnAfterSelectRandomizableBeforeRandomize;
+        public event RandomizerAction<TEntry, TEntry, TWrapper> OnAfterSelectRandomizableBeforeRandomize;
+
+        public event RandomizerAction<TEntry, TEntry, TWrapper> OnAfterEverything;
 
         protected List<TEntry> OriginalEntries { get; private set; }
 
@@ -42,6 +44,8 @@ namespace StraySouls.Randomizer
             RandomizableEntries.Shuffle();
             for (int i = 0; i < RandomizableEntries.Count; i++)
                 AssociatedWrappers[i].ReadToEntry(RandomizableEntries[i]);
+
+            OnAfterEverything?.Invoke(OriginalEntries, RandomizableEntries, AssociatedWrappers);
         }
 
         public virtual void Clear()
@@ -50,6 +54,7 @@ namespace StraySouls.Randomizer
             RandomizableEntries.Clear();
             AssociatedWrappers.Clear();
             OnAfterSelectRandomizableBeforeRandomize = null;
+            OnAfterEverything = null;
         }
 
         protected virtual void BeforeEverything() { }

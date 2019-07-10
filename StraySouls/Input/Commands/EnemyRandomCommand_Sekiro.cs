@@ -13,7 +13,8 @@ namespace StraySouls.Input
         private static readonly CommandArgCollection<EnemyRandomCommand_Sekiro> AVAILABLE_ARGUMENTS = new CommandArgCollection<EnemyRandomCommand_Sekiro>(
             new EnemyRandomArgs_Sekiro.RandomMainBoss(),
             new EnemyRandomArgs_Sekiro.RandomFriendlyNPC(),
-            new MultiplyEnemies());
+            new MultiplyEnemyArg(),
+            new RandomScaleArg());
 
         protected override void Execute(string filePath, string fileName)
         {
