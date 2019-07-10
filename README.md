@@ -1,7 +1,7 @@
 # StraySouls
-##Dependency
-.Net 4.6.2
-[JKAnderson/SoulsFormats](https://github.com/JKAnderson/SoulsFormats)
+## Dependency
+- .Net 4.6.2
+- [JKAnderson/SoulsFormats](https://github.com/JKAnderson/SoulsFormats)
 ## Usage
 1. Download UXM from [Nexus](https://www.nexusmods.com/darksouls3/mods/286) or [JKAnderson/UXM](https://github.com/JKAnderson/UXM)
 2. Unpack with UXM
